@@ -5,6 +5,8 @@ using UnityEngine;
 public class InputPlayer : MonoBehaviour
 {
     PlayerControls _playerControls;
+    [SerializeField]
+    PlayerLocomotion _playerLocomotion = null;
 
     public Vector2 _movementInput;
     public Vector2 _cameraInput;
@@ -13,6 +15,8 @@ public class InputPlayer : MonoBehaviour
 
     public float _cameraInputX;
     public float _cameraInputY;
+
+    public bool _jump;
 
 
     private float _moveAmount;
@@ -25,6 +29,7 @@ public class InputPlayer : MonoBehaviour
 
             _playerControls.PlayerMovements.Movements.performed += i => _movementInput =  i.ReadValue<Vector2>();
             _playerControls.PlayerMovements.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
+            _playerControls.PlayerMovements.Jump.performed += i => _jump = true;
             
         }
 
@@ -52,6 +57,18 @@ public class InputPlayer : MonoBehaviour
     {
 
         HandleMovementInputs();
+        HandleJumpInput();
+
+    }
+
+    private void HandleJumpInput()
+    {
+        if (_jump)
+        {
+            _jump = false;
+            _playerLocomotion.Jump();
+
+        }
 
     }
 }

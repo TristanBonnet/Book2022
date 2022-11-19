@@ -7,6 +7,10 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     InputPlayer _inputPlayer;
     [SerializeField]
+    PlayerState _playerState = null;
+    
+    
+    [SerializeField]
     Transform _cameraObject;
     [SerializeField]
     Rigidbody _playerRigibody = null;
@@ -14,6 +18,13 @@ public class PlayerLocomotion : MonoBehaviour
     float _playerWalkSpeed = 10;
     [SerializeField]
     float _rotationSpeed = 10;
+    [SerializeField]
+    int _maxJumpNumber = 1;
+
+    private int _currentJumpNumber = 0;
+    
+   
+    
 
     Vector3 _moveDirection;
 
@@ -57,6 +68,26 @@ public class PlayerLocomotion : MonoBehaviour
 
         HandleMovement();
         HandleRotation();
+
+
+    }
+
+    public void Jump()
+    {
+        if (_currentJumpNumber < _maxJumpNumber)
+        {
+            _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
+            _currentJumpNumber += 1;
+            _playerRigibody.AddForce(Vector3.up * 10000);
+        }
+        
+
+    }  
+
+    public void ResetJumpNumber()
+    {
+
+        _currentJumpNumber = 0;
 
 
     }
