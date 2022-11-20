@@ -12,6 +12,8 @@ public class PlayerState : MonoBehaviour
     Transform _playerTransform = null;
     [SerializeField]
     LayerMask _layerMask;
+    [SerializeField]
+    Gravity _gravity = null;
     public GeneralState _currentState;
     private GeneralState _lastState;
 
@@ -24,7 +26,7 @@ public class PlayerState : MonoBehaviour
     private float _lastPlayerPosition;
    
     
-   public  enum GeneralState
+   public enum GeneralState
    {
         Grounded,
         InAir,
@@ -199,44 +201,7 @@ public class PlayerState : MonoBehaviour
     private void CheckInAirState()
     {
        
-        if (_currentState == GeneralState.InAir)
-        {
-            CheckInAirSubState();
-            if (_currentInAirSubState == InAirSubState.Falling)
-            {
-                RaycastHit hit;
-
-                if (Physics.Raycast(_transformSphereTrace.position, _transformSphereTrace.up * -1, out hit, 0.2f, _layerMask))
-                {
-                    PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
-
-                    if (player == null)
-                    {
-                        
-                        _playerLocomotion.ResetJumpNumber();
-                        ChangeGeneralState(GeneralState.Grounded);
-                        Debug.Log(hit.distance);
-                    }
-                }
-                if (Physics.SphereCast(_transformSphereTrace.position, 0.1f, _transformSphereTrace.position, out hit, _layerMask))
-                {
-                    
-
-                    
-                    
-                    
-
-                }
-
-                else
-                {
-                    
-                }
-            }
-           
-
-           
-        }
+        
         
 
     }

@@ -10,12 +10,78 @@ public class Gravity : MonoBehaviour
     [SerializeField]
     float _gravity = -9.8f;
 
-    private void FixedUpdate()
+    [SerializeField]
+    PlayerState _playerState = null;
+
+    [SerializeField]
+    Transform _transformSphereTrace = null;
+
+    [SerializeField]
+    LayerMask _layerMask;
+
+    [SerializeField]
+    PlayerLocomotion _playerLocomotion = null;
+
+
+    private void Update()
     {
 
-        _rigidbody.AddForce(Vector3.up * _gravity * Time.deltaTime * 1000);
+
+       
+    }
+    private void FixedUpdate()
+    {
+        
+
+        
+        if (CheckGrounded() == false)
+        {
+            _rigidbody.AddForce(Vector3.up * _gravity * Time.deltaTime * 2000);
+        }
+
+        else
+        {
+            Debug.Log("Hit Ground");
+
+        }
 
     }
 
+    private bool CheckGrounded()
+    {
 
+        RaycastHit hit;
+
+        
+        
+
+         if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.3f, _layerMask))
+         {
+                    PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
+
+                    if (player == null)
+                    {
+
+                        _playerLocomotion.ResetJumpNumber();
+                        _playerState.ChangeGeneralState(PlayerState.GeneralState.Grounded);
+                        return true;
+
+                    }
+
+            return false;
+         }
+
+        else
+        {
+            return false;
+        }
+
+               
+
+         
+
+
+    }
+
+   
 }

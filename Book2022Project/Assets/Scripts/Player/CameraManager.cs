@@ -100,7 +100,7 @@ public class CameraManager : MonoBehaviour
 
             targetPosition  =- (distance - _cameraCollisionOffSet);
 
-            Debug.Log(hit.collider.gameObject);
+            //Debug.Log(hit.collider.gameObject);
         }
 
         if (Mathf.Abs(targetPosition) < _minimuCollisionOffSet)

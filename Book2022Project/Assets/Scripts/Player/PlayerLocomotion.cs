@@ -8,6 +8,8 @@ public class PlayerLocomotion : MonoBehaviour
     InputPlayer _inputPlayer;
     [SerializeField]
     PlayerState _playerState = null;
+    [SerializeField]
+    PlayerJump _playerJump = null;
     
     
     [SerializeField]
@@ -28,6 +30,8 @@ public class PlayerLocomotion : MonoBehaviour
 
     Vector3 _moveDirection;
 
+
+   
 
     private void HandleMovement()
     {
@@ -78,7 +82,8 @@ public class PlayerLocomotion : MonoBehaviour
         {
             _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
             _currentJumpNumber += 1;
-            _playerRigibody.AddForce(Vector3.up * 10000);
+            _playerJump.enabled = true;
+            Debug.Log("Jump");
         }
         
 
