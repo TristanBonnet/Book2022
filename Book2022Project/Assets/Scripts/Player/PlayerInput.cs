@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    
     [SerializeField]
     private float _joystickLeftXRange = 0.5f;
     [SerializeField]

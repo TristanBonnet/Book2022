@@ -10,6 +10,10 @@ public class PlayerLocomotion : MonoBehaviour
     PlayerState _playerState = null;
     [SerializeField]
     PlayerJump _playerJump = null;
+    [SerializeField]
+    WallJump _wallJump = null;
+    [SerializeField]
+    LayerMask _layerMask;
     
     
     [SerializeField]
@@ -22,6 +26,8 @@ public class PlayerLocomotion : MonoBehaviour
     float _rotationSpeed = 10;
     [SerializeField]
     int _maxJumpNumber = 1;
+    [SerializeField]
+    float _airControl = 1;
 
     private int _currentJumpNumber = 0;
     
@@ -30,14 +36,17 @@ public class PlayerLocomotion : MonoBehaviour
 
     Vector3 _moveDirection;
 
+    private void Update()
+    {
+       
+    }
 
-   
 
     private void HandleMovement()
     {
 
-        _moveDirection = _cameraObject.forward * _inputPlayer._verticalInput;
-        _moveDirection = _moveDirection + _cameraObject.right * _inputPlayer._horizontalInput;
+        _moveDirection = _cameraObject.forward * _inputPlayer._verticalInput * _airControl;
+        _moveDirection = _moveDirection + _cameraObject.right * _inputPlayer._horizontalInput * _airControl;
         _moveDirection.Normalize();
         _moveDirection.y = 0;
         _moveDirection = _moveDirection * _playerWalkSpeed;
@@ -78,12 +87,45 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void Jump()
     {
+        
         if (_currentJumpNumber < _maxJumpNumber)
         {
-            _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-            _currentJumpNumber += 1;
-            _playerJump.enabled = true;
-            Debug.Log("Jump");
+            if (_playerState._currentState == PlayerState.GeneralState.InAir)
+            {
+                
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, 2, _layerMask))
+                {
+                    
+                    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
+                    _wallJump.enabled = true;
+                }
+            }
+
+            else
+            {
+                _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
+                _currentJumpNumber += 1;
+                _playerJump.enabled = true;
+                Debug.Log("Jump");
+            }
+            
+        }
+
+        else
+        {
+            if (_playerState._currentState == PlayerState.GeneralState.InAir)
+            {
+                
+
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.position + transform.forward, 2, _layerMask))
+                {
+                    Debug.Log("DoubleJump");
+                    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
+                    _wallJump.enabled = true;
+                }
+            }
         }
         
 

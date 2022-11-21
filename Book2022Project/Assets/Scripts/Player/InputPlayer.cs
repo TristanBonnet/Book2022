@@ -7,6 +7,8 @@ public class InputPlayer : MonoBehaviour
     PlayerControls _playerControls;
     [SerializeField]
     PlayerLocomotion _playerLocomotion = null;
+    [SerializeField]
+    ClassicAttack _playerClassicAttack = null;
 
     public Vector2 _movementInput;
     public Vector2 _cameraInput;
@@ -17,6 +19,7 @@ public class InputPlayer : MonoBehaviour
     public float _cameraInputY;
 
     public bool _jump;
+    public bool _classicAttackActive = false;
 
 
     private float _moveAmount;
@@ -30,6 +33,7 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.Movements.performed += i => _movementInput =  i.ReadValue<Vector2>();
             _playerControls.PlayerMovements.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
             _playerControls.PlayerMovements.Jump.performed += i => _jump = true;
+            _playerControls.PlayerMovements.Attack.performed += i => _classicAttackActive = true;
             
         }
 
@@ -58,6 +62,7 @@ public class InputPlayer : MonoBehaviour
 
         HandleMovementInputs();
         HandleJumpInput();
+        HandleClassicAttackInput();
 
     }
 
@@ -69,6 +74,19 @@ public class InputPlayer : MonoBehaviour
             _playerLocomotion.Jump();
 
         }
+
+    }
+
+    private void HandleClassicAttackInput()
+    {
+        if (_classicAttackActive == true)
+        {
+
+            _classicAttackActive = false;
+            _playerClassicAttack.StartAttack();
+
+        }
+
 
     }
 }

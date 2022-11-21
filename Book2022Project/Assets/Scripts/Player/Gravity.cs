@@ -22,6 +22,12 @@ public class Gravity : MonoBehaviour
     [SerializeField]
     PlayerLocomotion _playerLocomotion = null;
 
+    [SerializeField]
+    WallJump _wallJump = null;
+
+    [SerializeField]
+    PlayerJump _playerJump = null;
+
 
     private void Update()
     {
@@ -49,32 +55,36 @@ public class Gravity : MonoBehaviour
 
     private bool CheckGrounded()
     {
-
-        RaycastHit hit;
-
-        
-        
-
-         if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.3f, _layerMask))
-         {
-                    PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
-
-                    if (player == null)
-                    {
-
-                        _playerLocomotion.ResetJumpNumber();
-                        _playerState.ChangeGeneralState(PlayerState.GeneralState.Grounded);
-                        return true;
-
-                    }
-
-            return false;
-         }
-
-        else
+        if (_playerJump.enabled == false && _wallJump.enabled == false)
         {
-            return false;
+            RaycastHit hit;
+            if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.3f, _layerMask))
+            {
+                PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
+
+                if (player == null)
+                {
+
+                    _playerLocomotion.ResetJumpNumber();
+                    _playerState.ChangeGeneralState(PlayerState.GeneralState.Grounded);
+                    return true;
+
+                }
+
+                return false;
+            }
+
+            else
+            {
+                return false;
+            }
         }
+
+        return false;
+        
+        
+
+         
 
                
 
