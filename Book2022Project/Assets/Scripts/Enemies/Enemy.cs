@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     private List<PathPoint> _pathPointList = null;
 
     [SerializeField]
-    float _pathPointDistancerange = 0.2f;
+    float _pathPointDistanceRange = 0.2f;
 
     [SerializeField]
     float _enemyWalkSpeed = 1;
@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     AISensor _aiSensor = null;
 
+    [SerializeField]
+    SeePlayer _seePlayer = null;
+
 
     private Rigidbody _enemyRigibody = null;
     private PathPoint _currentPathPoint = null;
@@ -29,6 +32,8 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     public EnemyState _enemyState = EnemyState.Patrol;
     public PatrolSubState _patrolSubState = PatrolSubState.Move;
+
+   public AISensor AISensor => _aiSensor;
 
     public enum EnemyState 
     {
@@ -81,7 +86,7 @@ public class Enemy : MonoBehaviour
                                         RotateEnemyToTarget(_currentPathPoint.transform);
                                         MoveToTarget();
 
-                                        if (CheckDistanceWithTarget(_currentPathPoint.transform) == false)
+                                        if (CheckDistanceWithTarget(_currentPathPoint.transform, _pathPointDistanceRange) == false)
                                         {
                                             _currentWaitingTime = 0;
                                             StopMovement();
@@ -126,8 +131,12 @@ public class Enemy : MonoBehaviour
 
 
                         // Move to player
-                        RotateEnemyToTarget(_aiSensor._player.transform);
-                        MoveToTarget();
+                        if (_seePlayer.enabled == false)
+                        {
+                            _seePlayer.enabled = true;
+                        }
+                        //RotateEnemyToTarget(_aiSensor._player.transform);
+                        //MoveToTarget();
 
 
                     }
@@ -161,11 +170,14 @@ public class Enemy : MonoBehaviour
 
     }
 
-     private void RotateEnemyToTarget(Transform target)
+     public void RotateEnemyToTarget(Transform target)
     {
+        Quaternion startRotation = transform.rotation;
         Vector3 targetPosition = target.transform.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(targetPosition, Vector3.up);
-        transform.rotation = rotation;
+        Quaternion finalRotation = new Quaternion(0, rotation.y, 0, rotation.w);
+        
+        transform.rotation = Quaternion.Slerp(startRotation, finalRotation, 0.5f);
 
 
     }
@@ -225,7 +237,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void MoveToTarget()
+    public void MoveToTarget()
     {
         float currentSpeed = 0;
 
@@ -239,21 +251,24 @@ public class Enemy : MonoBehaviour
             currentSpeed = _enemyRunSpeed;
         }
         Vector3 enemyVelocity = transform.forward * Time.deltaTime * currentSpeed;
+        //enemyVelocity.Normalize();
+        enemyVelocity.y = 0;
         _enemyRigibody.velocity = enemyVelocity;
+       
 
 
 
     }
 
-    private bool CheckDistanceWithTarget(Transform target)
+    public bool CheckDistanceWithTarget(Transform target, float distanceToCheck)
     {
 
       float currentDistanceWithTarget =   Vector3.Distance(target.transform.position, transform.position);
-      return currentDistanceWithTarget > _pathPointDistancerange;   
+      return currentDistanceWithTarget > distanceToCheck;   
 
     }
 
-    private void StopMovement()
+    public void StopMovement()
 
     {
         _enemyRigibody.velocity = Vector3.zero;
