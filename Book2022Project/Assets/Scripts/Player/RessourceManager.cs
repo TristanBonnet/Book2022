@@ -7,6 +7,10 @@ public class RessourceManager : MonoBehaviour
     [SerializeField]
     private HealthManager _healthManager = null;
 
+
+    [SerializeField]
+    public int _wrenchNumber = 0;
+
     [SerializeField]
     private int _maxScrapContainor = 10;
     public int _scrapNumber = 0;
@@ -43,7 +47,7 @@ public class RessourceManager : MonoBehaviour
         _currentRingNumberForHealth += ringAdded;
         if (_currentRingNumberForHealth == 5)
         {
-            _healthManager.AddHealthPoint();
+            _healthManager.AddHealthPoint(1);
             _currentRingNumberForHealth = 0;
         }
         
@@ -58,5 +62,14 @@ public class RessourceManager : MonoBehaviour
         {
             _ringNumber = 0;
         }
+    }
+
+    public void AddWrench(int wrenchAdded)
+    {
+        
+            _wrenchNumber += wrenchAdded;
+        
+
+
     }
 }
