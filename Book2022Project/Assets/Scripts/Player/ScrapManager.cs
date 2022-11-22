@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ScrapManager : MonoBehaviour
 {
-    [SerializeField]
+    
 
 }
