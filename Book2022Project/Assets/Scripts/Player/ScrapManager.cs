@@ -8,10 +8,19 @@ public class ScrapManager : MonoBehaviour
 
     public void AddScrap(int scrapAdded)
     {
-        _scrapNumber += _scrapNumber;
+        _scrapNumber += scrapAdded;
 
+    }
 
+    public void RemoveScrap(int scrapRemoved)
+    {
 
+        _scrapNumber -= scrapRemoved;
+
+        if (_scrapNumber < 0)
+        {
+            _scrapNumber = 0;
+        }
     }
 
 }
