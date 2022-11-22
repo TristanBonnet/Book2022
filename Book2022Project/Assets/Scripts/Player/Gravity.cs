@@ -31,6 +31,10 @@ public class Gravity : MonoBehaviour
     [SerializeField]
     float _gravityAccelerationIncrementor = 0.001f;
 
+    [SerializeField]
+    float _maxDistanceCheckGrounded = 0.2f;
+
+
     private float _currentGravityAcceleration = 1;
 
 
@@ -85,7 +89,7 @@ public class Gravity : MonoBehaviour
         if (_playerJump.enabled == false && _wallJump.enabled == false)
         {
             RaycastHit hit;
-            if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.5f, _layerMask))
+            if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, _maxDistanceCheckGrounded, _layerMask))
             {
                 PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
 
