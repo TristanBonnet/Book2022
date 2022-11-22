@@ -5,10 +5,14 @@ using UnityEngine;
 public class RessourceManager : MonoBehaviour
 {
     [SerializeField]
+    private HealthManager _healthManager = null;
+
+    [SerializeField]
     private int _maxScrapContainor = 10;
     public int _scrapNumber = 0;
         
     public int _ringNumber = 0;
+    private int _currentRingNumberForHealth = 0;
 
 
     public void AddScrap(int scrapAdded)
@@ -35,7 +39,13 @@ public class RessourceManager : MonoBehaviour
     public void AddRing(int ringAdded)
     {
         
-            _ringNumber += ringAdded;
+        _ringNumber += ringAdded;
+        _currentRingNumberForHealth += ringAdded;
+        if (_currentRingNumberForHealth == 5)
+        {
+            _healthManager.AddHealthPoint();
+            _currentRingNumberForHealth = 0;
+        }
         
     }
 
