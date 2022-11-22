@@ -9,6 +9,8 @@ public class WallJump : MonoBehaviour
     [SerializeField]
     private float _jumpForce = 1000;
     [SerializeField]
+    PlayerState _playerState = null;
+    [SerializeField]
     private Rigidbody _playerRigibody = null;
     [SerializeField]
     float YVelocity = 0;
@@ -38,5 +40,10 @@ public class WallJump : MonoBehaviour
     private void OnEnable()
     {
         _currentJumpTime = 0;
+    }
+
+    private void OnDisable()
+    {
+        _playerState._currentInAirSubState = PlayerState.InAirSubState.Falling;
     }
 }

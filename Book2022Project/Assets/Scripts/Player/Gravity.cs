@@ -28,6 +28,11 @@ public class Gravity : MonoBehaviour
     [SerializeField]
     PlayerJump _playerJump = null;
 
+    [SerializeField]
+    float _gravityAccelerationIncrementor = 0.001f;
+
+    private float _currentGravityAcceleration = 1;
+
 
     private void Update()
     {
@@ -37,20 +42,42 @@ public class Gravity : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
-
-        
+        Debug.Log(_currentGravityAcceleration);
         if (CheckGrounded() == false)
         {
-            _rigidbody.AddForce(Vector3.up * _gravity * Time.deltaTime * 2000);
+            switch (_playerState._currentInAirSubState)
+            {
+                case PlayerState.InAirSubState.Jumping:
+                    {
+                        _rigidbody.AddForce(Vector3.up * _gravity * Time.deltaTime * 2000);
+
+                    }
+                    break;
+                case PlayerState.InAirSubState.Falling:
+                    {
+                        
+                        _rigidbody.AddForce(Vector3.up * _gravity * Time.deltaTime * 4000);
+                        _currentGravityAcceleration += _gravityAccelerationIncrementor;
+                    }
+                    break;
+                case PlayerState.InAirSubState.none:
+                    break;
+                default:
+                    break;
+            }
+            
+
+
+
         }
 
         else
         {
-            Debug.Log("Hit Ground");
-
+            if (_currentGravityAcceleration != 1)
+            {
+                _currentGravityAcceleration = 1;
+            }
         }
-
     }
 
     private bool CheckGrounded()
@@ -58,7 +85,7 @@ public class Gravity : MonoBehaviour
         if (_playerJump.enabled == false && _wallJump.enabled == false)
         {
             RaycastHit hit;
-            if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.3f, _layerMask))
+            if (Physics.Raycast(_transformSphereTrace.position, Vector3.up * -1, out hit, 0.5f, _layerMask))
             {
                 PlayerLocomotion player = hit.collider.GetComponentInParent<PlayerLocomotion>();
 

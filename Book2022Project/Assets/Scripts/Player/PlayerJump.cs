@@ -7,6 +7,8 @@ public class PlayerJump : MonoBehaviour
     [SerializeField]
     private float _maxJumpTime = 0.5f;
     [SerializeField]
+    PlayerState _playerState = null;
+    [SerializeField]
     private  float _jumpForce = 1000;
     [SerializeField]
     private Rigidbody _playerRigibody = null;
@@ -38,6 +40,6 @@ public class PlayerJump : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        _playerState._currentInAirSubState = PlayerState.InAirSubState.Falling;
     }
 }

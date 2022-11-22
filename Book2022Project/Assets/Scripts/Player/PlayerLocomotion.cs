@@ -45,8 +45,8 @@ public class PlayerLocomotion : MonoBehaviour
     private void HandleMovement()
     {
 
-        _moveDirection = _cameraObject.forward * _inputPlayer._verticalInput * _airControl;
-        _moveDirection = _moveDirection + _cameraObject.right * _inputPlayer._horizontalInput * _airControl;
+        _moveDirection = _cameraObject.forward * _inputPlayer._verticalInput;
+        _moveDirection = _moveDirection + _cameraObject.right * _inputPlayer._horizontalInput;
         _moveDirection.Normalize();
         _moveDirection.y = 0;
         _moveDirection = _moveDirection * _playerWalkSpeed;
