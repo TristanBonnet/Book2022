@@ -13,6 +13,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     CameraManager _cameraManager = null;
 
+    [SerializeField]
+    LayerMask _layerMask;
+
     public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
 
    
@@ -20,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         _inputPlayer.HandleAllInputs();
+        TestBoxTrace();
     }
 
     private void FixedUpdate()
@@ -37,4 +41,18 @@ public class PlayerManager : MonoBehaviour
 
 
     }
+
+    private void TestBoxTrace()
+    {
+        RaycastHit hit;
+        
+        if (Physics.BoxCast(transform.position, new Vector3(1,1,1), Vector3.up * -1, out hit, transform.rotation, 2, _layerMask))
+        {
+            Debug.Log(hit.collider.gameObject);
+        }
+
+
+    }
+
+
 }

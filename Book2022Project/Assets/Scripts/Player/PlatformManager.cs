@@ -52,14 +52,22 @@ public class PlatformManager : MonoBehaviour
     public void ConstructPlatform()
     {
         _playerRigibody.AddForce(Vector3.up * _jumpForce);
+        RaycastHit hit;
+        Vector3 platformPosition;
 
-        //if (Physics.Raycast(_startTraceTransform.position, Vector3.up * -1, _YLocation ))
-        //{
+        if (Physics.Raycast(_startTraceTransform.position, Vector3.up * -1, out hit, _YLocation))
+        {
+            platformPosition = hit.point;
+        }
 
-        //}
-        
+        else
+        {
+            platformPosition = _startTraceTransform.position + Vector3.up * -1 * _YLocation;
+        }
 
-
+      Construction currentConstructionSpawned =  Instantiate<Construction>(GetCurrentConstruction());
+        currentConstructionSpawned.transform.position = platformPosition;
+        currentConstructionSpawned.transform.rotation = _startTraceTransform.transform.rotation;
 
     }
 }
