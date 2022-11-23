@@ -7,16 +7,49 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField]
     int _damageDealed = 1;
 
+    private PlayerManager _player = null;
+    private HealthManager _playerHealthManager = null;
+
+    public PlayerManager Player => _player;
+    public HealthManager PlayerHealthManager => _playerHealthManager;
+
+
+    private void Awake()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         
-        PlayerManager _player = other.GetComponentInParent<PlayerManager>();
-        HealthManager _playerHealthManager = other.GetComponentInParent<HealthManager>();
+        PlayerManager player = other.GetComponentInParent<PlayerManager>();
+        HealthManager playerHealthManager = other.GetComponentInParent<HealthManager>();
 
-        if (_player != null && _playerHealthManager != null)
+        if (player != null && playerHealthManager != null)
         {
-            Debug.Log("RemoveLife");
-            _playerHealthManager.RemoveHealthPoint(_damageDealed);
+            _player = player;
+            _playerHealthManager = playerHealthManager;
+            DoDamage();
+            
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerManager player = other.GetComponentInParent<PlayerManager>();
+        HealthManager playerHealthManager = other.GetComponentInParent<HealthManager>();
+
+        if (player != null && playerHealthManager != null)
+        {
+            _player = null;
+            _playerHealthManager = playerHealthManager;
+        }
+    }
+
+    public void DoDamage()
+    {
+
+        _playerHealthManager.RemoveHealthPoint(_damageDealed);
+
+
     }
 }
