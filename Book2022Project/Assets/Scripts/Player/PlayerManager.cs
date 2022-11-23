@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     CameraManager _cameraManager = null;
 
+    public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
+
    
 
     private void Update()

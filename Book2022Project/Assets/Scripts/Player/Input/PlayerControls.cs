@@ -62,6 +62,33 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncrementConstructionIndex"",
+                    ""type"": ""Button"",
+                    ""id"": ""95425e93-894e-4066-ba72-24f442100bb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecrementConstructionIndex"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ed26440-6f3e-458b-984e-bc82b87967e4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Construct"",
+                    ""type"": ""Button"",
+                    ""id"": ""117fc676-d59a-4b00-8757-bef604369d64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -284,6 +311,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""208c57da-74f0-4084-b3db-d138958b6029"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncrementConstructionIndex"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2d7e8ec-3583-48c9-a778-a01498e3e1ca"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DecrementConstructionIndex"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48b2ff15-0ddc-47d9-8214-cace0a51957b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Construct"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -296,6 +356,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovements_Camera = m_PlayerMovements.FindAction("Camera", throwIfNotFound: true);
         m_PlayerMovements_Jump = m_PlayerMovements.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovements_Attack = m_PlayerMovements.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerMovements_IncrementConstructionIndex = m_PlayerMovements.FindAction("IncrementConstructionIndex", throwIfNotFound: true);
+        m_PlayerMovements_DecrementConstructionIndex = m_PlayerMovements.FindAction("DecrementConstructionIndex", throwIfNotFound: true);
+        m_PlayerMovements_Construct = m_PlayerMovements.FindAction("Construct", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +422,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovements_Camera;
     private readonly InputAction m_PlayerMovements_Jump;
     private readonly InputAction m_PlayerMovements_Attack;
+    private readonly InputAction m_PlayerMovements_IncrementConstructionIndex;
+    private readonly InputAction m_PlayerMovements_DecrementConstructionIndex;
+    private readonly InputAction m_PlayerMovements_Construct;
     public struct PlayerMovementsActions
     {
         private @PlayerControls m_Wrapper;
@@ -367,6 +433,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_PlayerMovements_Camera;
         public InputAction @Jump => m_Wrapper.m_PlayerMovements_Jump;
         public InputAction @Attack => m_Wrapper.m_PlayerMovements_Attack;
+        public InputAction @IncrementConstructionIndex => m_Wrapper.m_PlayerMovements_IncrementConstructionIndex;
+        public InputAction @DecrementConstructionIndex => m_Wrapper.m_PlayerMovements_DecrementConstructionIndex;
+        public InputAction @Construct => m_Wrapper.m_PlayerMovements_Construct;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovements; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,6 +457,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
+                @IncrementConstructionIndex.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
+                @IncrementConstructionIndex.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
+                @IncrementConstructionIndex.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
+                @DecrementConstructionIndex.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
+                @DecrementConstructionIndex.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
+                @DecrementConstructionIndex.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
+                @Construct.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
+                @Construct.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
+                @Construct.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
             }
             m_Wrapper.m_PlayerMovementsActionsCallbackInterface = instance;
             if (instance != null)
@@ -404,6 +482,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @IncrementConstructionIndex.started += instance.OnIncrementConstructionIndex;
+                @IncrementConstructionIndex.performed += instance.OnIncrementConstructionIndex;
+                @IncrementConstructionIndex.canceled += instance.OnIncrementConstructionIndex;
+                @DecrementConstructionIndex.started += instance.OnDecrementConstructionIndex;
+                @DecrementConstructionIndex.performed += instance.OnDecrementConstructionIndex;
+                @DecrementConstructionIndex.canceled += instance.OnDecrementConstructionIndex;
+                @Construct.started += instance.OnConstruct;
+                @Construct.performed += instance.OnConstruct;
+                @Construct.canceled += instance.OnConstruct;
             }
         }
     }
@@ -414,5 +501,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnIncrementConstructionIndex(InputAction.CallbackContext context);
+        void OnDecrementConstructionIndex(InputAction.CallbackContext context);
+        void OnConstruct(InputAction.CallbackContext context);
     }
 }

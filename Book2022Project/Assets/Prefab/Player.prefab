@@ -100,6 +100,8 @@ GameObject:
   - component: {fileID: 69681354460280213}
   - component: {fileID: 69681354460280212}
   - component: {fileID: 69681354460280215}
+  - component: {fileID: 939576261}
+  - component: {fileID: 939576269}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -114,7 +116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69681354460280290}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.81, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -224,6 +226,7 @@ MonoBehaviour:
   _wallJump: {fileID: 69681354460280215}
   _playerJump: {fileID: 69681354460280212}
   _gravityAccelerationIncrementor: 1
+  _maxDistanceCheckGrounded: 0.2
 --- !u!114 &69681354460280213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +284,38 @@ MonoBehaviour:
   _playerRigibody: {fileID: 69681354460280301}
   YVelocity: 1500
   ZVelocity: -800
+--- !u!114 &939576261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c74d4ff3b6dafc4480be90f7592b8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthManager: {fileID: 939576269}
+  _wrenchNumber: 0
+  _maxScrapContainor: 10
+  _scrapNumber: 0
+  _ringNumber: 0
+--- !u!114 &939576269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5a8a216737c479ac82d7fbc2a3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealthPoint: 4
+  _isDead: 0
+  _currentHealthPoint: 4
 --- !u!1 &69681354956681671
 GameObject:
   m_ObjectHideFlags: 0

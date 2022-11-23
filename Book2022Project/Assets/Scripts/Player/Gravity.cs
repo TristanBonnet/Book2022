@@ -46,7 +46,7 @@ public class Gravity : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(_currentGravityAcceleration);
+
         if (CheckGrounded() == false)
         {
             switch (_playerState._currentInAirSubState)
