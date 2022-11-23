@@ -10,7 +10,10 @@ public class MeleeEnemySeePlayer : SeePlayer
     [SerializeField]
     Collider _damageCollider = null;
 
+    [SerializeField]
+    private EnemyDamage _enemyDamage = null;
 
+    
 
     private void FixedUpdate()
     {
@@ -21,10 +24,7 @@ public class MeleeEnemySeePlayer : SeePlayer
 
             if (_enemy.CheckDistanceWithTarget(_enemy.AISensor._player.transform, _distanceRangeWithPlayer))
             {
-                if (_damageCollider.enabled == false)
-                {
-                    //_damageCollider.enabled = true;
-                }
+                
                 _enemy.MoveToTarget();
                 
 
@@ -41,18 +41,16 @@ public class MeleeEnemySeePlayer : SeePlayer
                 _enemy.StopMovement();
                 if (_currentDelayBetweenAttacks < _delayBetweenAttacks)
                 {
-                    if (_damageCollider.enabled)
-                    {
-                        _damageCollider.enabled = false;
-                    }
+                    
                     _currentDelayBetweenAttacks += Time.deltaTime;
                     
                 }
 
                 else
                 {
-                    _damageCollider.enabled = true;
-                    
+
+                    _enemyDamage.DoDamage();
+
                     _currentDelayBetweenAttacks = 0;
                 }
             }
