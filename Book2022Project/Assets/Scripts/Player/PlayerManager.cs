@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         _playerLocomotion.HandleAllMovements();
+        //_playerLocomotion.CheckGrounded();
     }
 
     private void LateUpdate()
@@ -48,7 +49,7 @@ public class PlayerManager : MonoBehaviour
         
         if (Physics.BoxCast(transform.position, new Vector3(1,1,1), Vector3.up * -1, out hit, transform.rotation, 2, _layerMask))
         {
-            Debug.Log(hit.collider.gameObject);
+            
         }
 
 

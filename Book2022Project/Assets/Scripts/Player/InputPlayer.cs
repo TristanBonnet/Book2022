@@ -82,7 +82,7 @@ public class InputPlayer : MonoBehaviour
         if (_jump)
         {
             _jump = false;
-            _playerLocomotion.Jump();
+            _playerLocomotion.JumpInput();
 
         }
 

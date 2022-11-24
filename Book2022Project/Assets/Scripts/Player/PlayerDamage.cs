@@ -10,7 +10,7 @@ public class PlayerDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Enemy _enemy = other.GetComponentInParent<Enemy>();
-        HealthManager _health = GetComponentInParent<HealthManager>();
+        HealthManager _health = other.GetComponentInParent<HealthManager>();
 
         if (_enemy != null && _health != null)
         {
