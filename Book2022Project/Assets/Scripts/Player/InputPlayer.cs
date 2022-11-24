@@ -9,6 +9,9 @@ public class InputPlayer : MonoBehaviour
     PlayerLocomotion _playerLocomotion = null;
     [SerializeField]
     ClassicAttack _playerClassicAttack = null;
+    [SerializeField]
+    PlatformManager _playerPlatformManager = null;
+    
 
     public Vector2 _movementInput;
     public Vector2 _cameraInput;
@@ -20,6 +23,9 @@ public class InputPlayer : MonoBehaviour
 
     public bool _jump;
     public bool _classicAttackActive = false;
+    public bool _incrementConstructionIndex = false;
+    public bool _decrementConstructionIndex = false;
+    public bool _construct = false;
 
 
     private float _moveAmount;
@@ -34,7 +40,11 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.Camera.performed += i => _cameraInput = i.ReadValue<Vector2>();
             _playerControls.PlayerMovements.Jump.performed += i => _jump = true;
             _playerControls.PlayerMovements.Attack.performed += i => _classicAttackActive = true;
-            
+            _playerControls.PlayerMovements.IncrementConstructionIndex.performed += i => _incrementConstructionIndex = true;
+            _playerControls.PlayerMovements.DecrementConstructionIndex.performed += i => _decrementConstructionIndex = true;
+            _playerControls.PlayerMovements.Construct.performed += i => _construct = true;
+
+
         }
 
         _playerControls.Enable();
@@ -63,6 +73,7 @@ public class InputPlayer : MonoBehaviour
         HandleMovementInputs();
         HandleJumpInput();
         HandleClassicAttackInput();
+        HandleConstructionInputs();
 
     }
 
@@ -87,6 +98,49 @@ public class InputPlayer : MonoBehaviour
 
         }
 
+
+    }
+
+    private void HandleIncrementConstructionIndex()
+    {
+
+        if (_incrementConstructionIndex)
+        {
+            _incrementConstructionIndex = false;
+            _playerPlatformManager.ChangeConstructionList(true);
+            
+        }
+
+
+
+    }
+
+    private void HandleDecrementConstructionIndex()
+    {
+        if (_decrementConstructionIndex)
+        {
+            _decrementConstructionIndex = false;
+            _playerPlatformManager.ChangeConstructionList(false);
+        }
+
+    }
+
+    private void HandleConstruct()
+    {
+        if (_construct)
+        {
+            _construct = false;
+            _playerPlatformManager.ConstructPlatform();
+        }
+
+
+    }
+
+    private void HandleConstructionInputs()
+    {
+        HandleIncrementConstructionIndex();
+        HandleDecrementConstructionIndex();
+        HandleConstruct();
 
     }
 }
