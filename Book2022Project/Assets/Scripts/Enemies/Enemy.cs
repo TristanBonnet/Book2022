@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -20,9 +21,13 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     AISensor _aiSensor = null;
-
+    [SerializeField]
+    RessourcesSpawner _ressourcesSpawner = null;
     [SerializeField]
     SeePlayer _seePlayer = null;
+    [SerializeField]
+    UnityEvent _event = null;
+    
 
 
     private Rigidbody _enemyRigibody = null;
@@ -273,6 +278,19 @@ public class Enemy : MonoBehaviour
     {
         _enemyRigibody.velocity = Vector3.zero;
 
+
+    }
+
+    public void SetDeadState()
+    {
+        Debug.Log("DESTROY ENEMY");
+        if (_ressourcesSpawner != null)
+        {
+            _ressourcesSpawner.SpawnRessource();
+        }
+
+
+        Destroy(this.gameObject);
 
     }
 }

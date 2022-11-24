@@ -14,8 +14,19 @@ public class PlayerLocomotion : MonoBehaviour
     WallJump _wallJump = null;
     [SerializeField]
     LayerMask _layerMask;
-    
-    
+    [SerializeField]
+    float _leapingVelocity = 5;
+    [SerializeField]
+    float _fallingVelocity = 15;
+    [SerializeField]
+    float _jumpVelocity = 100;
+    [SerializeField]
+    float _wallJumpZVelocity = 800;
+    [SerializeField]
+    float _wallJumpYVelocity = 1500;
+
+
+
     [SerializeField]
     Transform _cameraObject;
     [SerializeField]
@@ -28,17 +39,23 @@ public class PlayerLocomotion : MonoBehaviour
     int _maxJumpNumber = 1;
     [SerializeField]
     float _airControl = 1;
+    [SerializeField]
+    Collider _collider = null;
 
     private int _currentJumpNumber = 0;
     private GameObject currentGameObjectFrontOfPlayer = null;
-      
+    public float rayCastHeightOffSet = 0.5f;
     public Rigidbody PlayerRigibody => _playerRigibody;
-    
+
+    private float inAirTimer = 0;
 
     Vector3 _moveDirection;
 
     private void Update()
     {
+
+       
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2, _layerMask))
         {
@@ -53,7 +70,12 @@ public class PlayerLocomotion : MonoBehaviour
             }
         }
 
-        Debug.Log(currentGameObjectFrontOfPlayer);
+        //Debug.Log(currentGameObjectFrontOfPlayer);
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(_collider.bounds.center, _collider.bounds.size * 1.2f);
     }
 
 
@@ -96,73 +118,34 @@ public class PlayerLocomotion : MonoBehaviour
 
         HandleMovement();
         HandleRotation();
+        CheckGrounded();
 
 
     }
 
-    public void Jump()
+    public void JumpInput()
     {
-        
-        if (_currentJumpNumber < _maxJumpNumber)
+        if (_playerState._currentState == PlayerState.GeneralState.Grounded)
         {
-            if (_playerState._currentState == PlayerState.GeneralState.InAir)
-            {
-
-                //RaycastHit hit;
-                //if (Physics.Raycast(transform.position, transform.forward, 2, _layerMask))
-                //{
-                //    Debug.Log("CAN WALL JUMP");
-                //    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                //    _wallJump.enabled = true;
-                //}
-
-                if (currentGameObjectFrontOfPlayer != null)
-                {
-                    Debug.Log("CAN WALL JUMP");
-                    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                    _wallJump.enabled = true;
-                }
-            }
-
-            else
-            {
-                _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                _currentJumpNumber += 1;
-                _playerJump.enabled = true;
-                Debug.Log("Jump");
-            }
-            
+            Jump();
         }
 
         else
         {
-            if (_playerState._currentState == PlayerState.GeneralState.InAir)
-            {
-
-
-                //RaycastHit hit;
-                //if (Physics.Raycast(transform.position, transform.position, 2, _layerMask))
-                //{
-                //    Debug.Log("DoubleJump");
-                //    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                //    _wallJump.enabled = true;
-                //}
-
-                if (currentGameObjectFrontOfPlayer != null)
-                {
-                    Debug.Log("CAN WALL JUMP");
-                    _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                    _wallJump.enabled = true;
-                }
-            }
-
             if (currentGameObjectFrontOfPlayer != null)
             {
-                Debug.Log("CAN WALL JUMP");
-                _playerState.ChangeInAirSubState(PlayerState.InAirSubState.Jumping);
-                _wallJump.enabled = true;
+                WallJump();
+            }
+
+            else
+            {
+                if (_currentJumpNumber < _maxJumpNumber)
+                {
+                    Jump();
+                }
             }
         }
+        
         
 
     }  
@@ -174,4 +157,51 @@ public class PlayerLocomotion : MonoBehaviour
 
 
     }
+
+    public void CheckGrounded()
+    {
+
+        RaycastHit hit;
+        Vector3 rayCastOrigin = transform.position;
+
+        rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;
+
+        if (_playerState._currentState != PlayerState.GeneralState.Grounded)
+        {
+            inAirTimer += Time.deltaTime;
+            _playerRigibody.AddForce(transform.forward * _leapingVelocity);
+            _playerRigibody.AddForce(-Vector3.up * _fallingVelocity * inAirTimer);
+            
+
+        }
+        
+        if (Physics.Raycast(transform.position, Vector3.down,1.5f, _layerMask ))
+        {
+            inAirTimer = 0;
+            _playerState._currentState = PlayerState.GeneralState.Grounded;
+            _currentJumpNumber = 0;
+            
+        }
+
+        else
+        {
+            _playerState._currentState = PlayerState.GeneralState.InAir;
+            
+        }
+    }
+
+    private void WallJump()
+    {
+        _playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
+        _playerRigibody.AddForce(-Vector3.forward * _wallJumpZVelocity);
+
+
+    }
+
+    private void Jump()
+    {
+
+        _playerRigibody.AddForce(Vector3.up * _jumpVelocity);
+    }
+
 }

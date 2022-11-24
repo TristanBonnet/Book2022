@@ -52,7 +52,7 @@ public class ClassicAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
+        
     }
 
     public void StartAttack()
@@ -77,7 +77,7 @@ public class ClassicAttack : MonoBehaviour
 
     public void SetAttackNumber()
     {
-        Debug.Log("ATTACK");
+        
         if (_attackNumber < 3)
         {
             _attackNumber += 1;

@@ -17,8 +17,8 @@ public class RotateObject : MonoBehaviour
 
     private void Update()
     {
-        Quaternion rotation = new Quaternion(transform.rotation.x + XRotationSpeed * Time.deltaTime, transform.rotation.y + YRotationSpeed * Time.deltaTime, transform.rotation.z + ZRotationSpeed * Time.deltaTime, 0);
-
-        transform.rotation = rotation;
+        transform.Rotate(Vector3.up, Time.deltaTime * YRotationSpeed);
+        transform.Rotate(Vector3.right, Time.deltaTime * XRotationSpeed);
+        transform.Rotate(Vector3.forward, Time.deltaTime * ZRotationSpeed);
     }
 }

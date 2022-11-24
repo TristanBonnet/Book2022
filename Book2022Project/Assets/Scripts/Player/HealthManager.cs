@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HealthManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HealthManager : MonoBehaviour
 
     [SerializeField]
     bool _isDead = false;
+    [SerializeField]
+    UnityEvent _deadEvent = null;
 
     public int _currentHealthPoint = 0;
 
@@ -32,6 +35,7 @@ public class HealthManager : MonoBehaviour
             {
                 _currentHealthPoint = 0;
                 _isDead = true;
+                _deadEvent.Invoke();
             }
 
             else
@@ -39,9 +43,16 @@ public class HealthManager : MonoBehaviour
                 _isDead = false;
             }
         }
+
+        else
+        {
+            _deadEvent.Invoke();
+        }
         
 
 
 
     }
+
+    
 }
