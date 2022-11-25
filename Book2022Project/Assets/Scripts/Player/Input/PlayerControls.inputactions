@@ -303,6 +303,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8ce40b19-f3f5-4a9c-a822-ee2307c6c509",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "IncrementConstructionIndex",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f2d7e8ec-3583-48c9-a778-a01498e3e1ca",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -314,8 +325,30 @@
                 },
                 {
                     "name": "",
+                    "id": "5e235729-cbd5-4552-b2f8-fdee3fbc3a1d",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DecrementConstructionIndex",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "48b2ff15-0ddc-47d9-8214-cace0a51957b",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Construct",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f0434ba-6ae6-47b1-bfca-f3bca554510b",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

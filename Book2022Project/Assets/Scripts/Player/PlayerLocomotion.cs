@@ -24,6 +24,7 @@ public class PlayerLocomotion : MonoBehaviour
     float _wallJumpZVelocity = 800;
     [SerializeField]
     float _wallJumpYVelocity = 1500;
+   
 
 
 
@@ -42,18 +43,35 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     Collider _collider = null;
 
-    private int _currentJumpNumber = 0;
+    public int _currentJumpNumber = 0;
     private GameObject currentGameObjectFrontOfPlayer = null;
     public float rayCastHeightOffSet = 0.5f;
     public Rigidbody PlayerRigibody => _playerRigibody;
+    private float _maxTimeReset = 0.1f;
+    private float _currentTimeReset = 0;
+    private bool _startDelayResetJump = false;
 
     private float inAirTimer = 0;
 
     Vector3 _moveDirection;
 
+    
+
     private void Update()
     {
+        if (_startDelayResetJump)
+        {
+            if (_currentTimeReset < _maxTimeReset)
+            {
+                _currentTimeReset += Time.deltaTime;
+            }
 
+            else
+            {
+                _currentTimeReset = 0;
+                _startDelayResetJump = false;
+            }
+        }
        
 
         RaycastHit hit;
@@ -127,6 +145,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (_playerState._currentState == PlayerState.GeneralState.Grounded)
         {
+            Debug.Log("PLAYER GROUNDED");
             Jump();
         }
 
@@ -175,11 +194,16 @@ public class PlayerLocomotion : MonoBehaviour
 
         }
         
-        if (Physics.Raycast(transform.position, Vector3.down,1.5f, _layerMask ))
+        if (Physics.Raycast(transform.position, Vector3.down,1.2f, _layerMask ))
         {
-            inAirTimer = 0;
-            _playerState._currentState = PlayerState.GeneralState.Grounded;
-            _currentJumpNumber = 0;
+            if (_startDelayResetJump == false)
+            {
+                inAirTimer = 0;
+                _playerState._currentState = PlayerState.GeneralState.Grounded;
+                Debug.Log("RESET NUMBER");
+                _currentJumpNumber = 0;
+            }
+            
             
         }
 
@@ -200,8 +224,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Jump()
     {
-
+        
         _playerRigibody.AddForce(Vector3.up * _jumpVelocity);
+        _currentJumpNumber += 1;
+        _startDelayResetJump = true;
     }
 
 }
