@@ -9,15 +9,23 @@ public class RessourceManager : MonoBehaviour
 
 
     [SerializeField]
-    public int _wrenchNumber = 0;
+    private int _wrenchNumber = 0;
 
     [SerializeField]
     private int _maxScrapContainor = 10;
-    public int _scrapNumber = 0;
+    [SerializeField]
+    private int _scrapNumber = 0;
+    [SerializeField]
+    private int _goldenScrapNumber = 0;
         
     public int _ringNumber = 0;
     private int _currentRingNumberForHealth = 0;
 
+    public int WrenchNumber => _wrenchNumber;
+    public int ScrapNumber => _scrapNumber;
+    public int RingNumber => _ringNumber;
+
+    public int GoldenScrapNumber => _goldenScrapNumber;
 
     public void AddScrap(int scrapAdded)
     {
@@ -25,8 +33,8 @@ public class RessourceManager : MonoBehaviour
         {
             _scrapNumber += scrapAdded;
         }
-        
 
+        UpdateScrapText();
     }
 
     public void RemoveScrap(int scrapRemoved)
@@ -38,6 +46,8 @@ public class RessourceManager : MonoBehaviour
         {
             _scrapNumber = 0;
         }
+
+        UpdateScrapText();
     }
 
     public void AddRing(int ringAdded)
@@ -50,6 +60,7 @@ public class RessourceManager : MonoBehaviour
             _healthManager.AddHealthPoint(1);
             _currentRingNumberForHealth = 0;
         }
+        
         
     }
 
@@ -68,8 +79,50 @@ public class RessourceManager : MonoBehaviour
     {
         
             _wrenchNumber += wrenchAdded;
-        
 
+
+        UpdateWrenchText();
+    }
+
+    public void AddGoldenScrap(int goldenScrapAdded)
+    {
+
+        _goldenScrapNumber += goldenScrapAdded;
+
+        UpdateGoldenScrapText();
+    }
+
+    public void RemoveGoldenScrap(int goldenScrapRemoved)
+    {
+        _goldenScrapNumber -= goldenScrapRemoved;
+
+        if (_goldenScrapNumber < 0)
+        {
+            _goldenScrapNumber = 0;
+        }
+
+        UpdateGoldenScrapText();
+
+    }
+
+    private void UpdateScrapText()
+    {
+
+        GameManager._instance.UIManager.UpdateScrapText();
+
+    }
+
+    private void UpdateGoldenScrapText()
+    {
+
+        GameManager._instance.UIManager.UpdateGoldenScrapText();
+
+    }
+
+    private void UpdateWrenchText()
+    {
+
+        GameManager._instance.UIManager.UpdateWrenchText();
 
     }
 }

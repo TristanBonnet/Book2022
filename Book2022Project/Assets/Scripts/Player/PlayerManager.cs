@@ -16,10 +16,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     LayerMask _layerMask;
 
+    [SerializeField]
+    StartTransformProjectile _startTransformProjectile = null;
+
     public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
 
-   
+    public StartTransformProjectile StartTransformProjectile => _startTransformProjectile;
 
+    
     private void Update()
     {
         _inputPlayer.HandleAllInputs();

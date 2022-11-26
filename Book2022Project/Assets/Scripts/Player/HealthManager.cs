@@ -22,7 +22,7 @@ public class HealthManager : MonoBehaviour
             _currentHealthPoint += 1;
         }
 
-
+        UpdateUIManager();
     }
 
     public void RemoveHealthPoint(int HealthRemoved)
@@ -48,11 +48,23 @@ public class HealthManager : MonoBehaviour
         {
             _deadEvent.Invoke();
         }
-        
 
 
+        UpdateUIManager();
 
     }
 
-    
+    public void UpdateUIManager()
+    {
+        PlayerManager playerManager = GetComponentInParent<PlayerManager>();
+
+        if (playerManager != null)
+        {
+
+            GameManager._instance.UIManager.UpdateRingText();
+
+        }
+
+
+    }
 }

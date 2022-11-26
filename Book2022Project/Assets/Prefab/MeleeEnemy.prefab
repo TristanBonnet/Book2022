@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8398900423785168312}
   - component: {fileID: 8398900423785168315}
   - component: {fileID: 8398900423785168314}
+  - component: {fileID: 1036035157}
   m_Layer: 0
   m_Name: EnemyCollider
   m_TagString: Untagged
@@ -93,6 +94,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageDealed: 1
+--- !u!114 &1036035157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398900423785168313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83b5a8a216737c479ac82d7fbc2a3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealthPoint: 4
+  _isDead: 0
+  _deadEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1558849213}
+        m_TargetAssemblyTypeName: RessourcesSpawner, Assembly-CSharp
+        m_MethodName: SpawnRessource
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8398900424699653620}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: SetDeadState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _currentHealthPoint: 4
 --- !u!1 &8398900423885997361
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +375,7 @@ GameObject:
   - component: {fileID: 8398900424699653621}
   - component: {fileID: 8398900424699653620}
   - component: {fileID: 8398900424699653623}
+  - component: {fileID: 1558849213}
   m_Layer: 0
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -393,7 +437,11 @@ MonoBehaviour:
   _enemyWalkSpeed: 200
   _enemyRunSpeed: 400
   _aiSensor: {fileID: 8398900424105653739}
+  _ressourcesSpawner: {fileID: 1558849213}
   _seePlayer: {fileID: 8398900424699653623}
+  _event:
+    m_PersistentCalls:
+      m_Calls: []
   _currentPathPointIndex: 0
   _enemyState: 0
   _patrolSubState: 0
@@ -413,3 +461,17 @@ MonoBehaviour:
   _distanceRangeWithPlayer: 1
   _damageCollider: {fileID: 8398900423785168315}
   _enemyDamage: {fileID: 8398900423785168314}
+--- !u!114 &1558849213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398900424699653619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf085902f47c68149ba89e19dabc6bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ressource: {fileID: 0}
+  _ressourceNumber: 5

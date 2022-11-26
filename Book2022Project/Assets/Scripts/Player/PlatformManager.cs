@@ -7,6 +7,8 @@ public class PlatformManager : MonoBehaviour
     [SerializeField]
     List<Construction> _constructionList = null;
     [SerializeField]
+    List<BlueprintAttack> _attackList = null;
+    [SerializeField]
     private Rigidbody _playerRigibody = null;
     [SerializeField]
     private float _jumpForce = 10000;
@@ -14,39 +16,99 @@ public class PlatformManager : MonoBehaviour
     private Transform _startTraceTransform = null;
     [SerializeField]
     private float _YLocation = 5;
+    [SerializeField]
+    RessourceManager _ressourceManager = null;
+    [SerializeField]
+    List<bool> _activeConstructionList;
+
+    private Construction _currentPlateform = null;
+
+    private Construction _currentSelectedPlatform = null;
+
+    private BlueprintAttack _currentSelectedAttack = null;
+
+    public int _currentIndexConstructionList = 0;
+    public int _currentIndexAttackList = 0;
 
 
-
-    public int _currentIndexList = 0;
-
-    public void ChangeConstructionList(bool increment)
+    private void Start()
     {
-        if (increment)
-        {
-            _currentIndexList += 1;
+        
+        UpdateUISelectedPlatform();
+        UpdateUISelectedAttack();
 
-            if (_currentIndexList > _constructionList.Count - 1)
-            {
-                _currentIndexList = 0;
-            }
+        if (_constructionList.Count > 0 && _constructionList[0] != null)
+        {
+            _currentSelectedPlatform = _constructionList[0];
         }
 
-        else
+        if (_attackList.Count > 0 && _attackList[0] != null)
         {
-            _currentIndexList -= 1;
-
-            if (_currentIndexList < 0)
-            {
-                _currentIndexList = _constructionList.Count - 1;
-            }
+            _currentSelectedAttack = _attackList[0];
+            SetBlueprintAttackProperties();
         }
+
+        
+    }
+    public void ChangeConstructionList()
+    {
+
+        if (_constructionList.Count > 0)
+        {
+            _currentIndexConstructionList += 1;
+
+            if (_currentIndexConstructionList > _constructionList.Count - 1)
+            {
+                _currentIndexConstructionList = 0;
+            }
+
+
+
+            _currentSelectedPlatform = _constructionList[_currentIndexConstructionList];
+
+            if (_currentSelectedPlatform != null)
+            {
+                UpdateUISelectedPlatform();
+            }
+
+        }
+
+
+
+
+    }
+
+    public void ChangeAttackList()
+    {
+
+        if (_attackList.Count > 0)
+        {
+            _currentIndexAttackList+= 1;
+
+            if (_currentIndexAttackList > _attackList.Count - 1)
+            {
+                _currentIndexAttackList = 0;
+            }
+
+
+
+            _currentSelectedAttack=  _attackList[_currentIndexAttackList];
+
+            if (_currentSelectedAttack != null)
+            {
+                UpdateUISelectedAttack();
+            }
+
+        }
+
+
 
 
     }
 
     public Construction GetCurrentConstruction()
     {
-        return _constructionList[_currentIndexList];
+        return _currentSelectedPlatform;
     }
 
     public void ConstructPlatform()
@@ -65,9 +127,159 @@ public class PlatformManager : MonoBehaviour
             platformPosition = _startTraceTransform.position + Vector3.up * -1 * _YLocation;
         }
 
-      Construction currentConstructionSpawned =  Instantiate<Construction>(GetCurrentConstruction());
-        currentConstructionSpawned.transform.position = platformPosition;
-        currentConstructionSpawned.transform.rotation = _startTraceTransform.transform.rotation;
+        if (_currentPlateform != null)
+        {
+            Destroy(_currentPlateform.gameObject);
+        }
+        Construction currentConstructionSelected = GetCurrentConstruction();
+
+        if (currentConstructionSelected != null)
+        {
+            Construction currentConstructionSpawned = Instantiate<Construction>(currentConstructionSelected);
+            currentConstructionSpawned.transform.position = platformPosition;
+            currentConstructionSpawned.transform.rotation = _startTraceTransform.transform.rotation;
+            _currentPlateform = currentConstructionSpawned;
+        }
+       
+        
+    }
+
+    public void Attack()
+    {
+
+        _currentSelectedAttack.CheckInputAttackScrap();
+        Debug.Log(_currentSelectedAttack);
+
+    }
+
+    public void CheckConstructionCost()
+    {
+        if (_constructionList.Count > 0) 
+        {
+            if (_ressourceManager.ScrapNumber >= _constructionList[_currentIndexConstructionList].ScrapCost)
+            {
+
+                ConstructPlatform();
+                _ressourceManager.RemoveScrap(_constructionList[_currentIndexConstructionList].ScrapCost);
+
+            }
+        }
+       
+    }
+    public void CheckAttackCost()
+    {
+        
+        if (_attackList.Count > 0)
+        {
+            if (_ressourceManager.ScrapNumber >= _attackList[_currentIndexAttackList].ScrapCost)
+            {
+                
+                 Attack();
+                _ressourceManager.RemoveScrap(_attackList[_currentIndexAttackList].ScrapCost);
+
+            }
+        }
+
+    }
+
+
+
+    private void UpdateUISelectedPlatform()
+    {
+        if (_currentSelectedPlatform != null)
+        {
+            GameManager._instance.UIManager.UpdateConstructionPicture(_currentSelectedPlatform.ConstructionSprite);
+        }
+        
+
+    }
+
+    private void UpdateUISelectedAttack()
+    {
+        if (_currentSelectedAttack != null)
+        {
+            // ADD UPDATE ATATCK PICTURE IN UI MANAGER
+        }
+    }
+
+    public bool AddConstructionToList(int constructionIndex)
+    {
+        Construction currentConstructionAdded = GameManager._instance.Blueprint.ConstructionList[constructionIndex];
+
+        if (CheckIfConstructionIsAlreadyActivated(currentConstructionAdded) == false)
+        {
+            _constructionList.Add(currentConstructionAdded);
+            _currentSelectedPlatform = _constructionList[_constructionList.Count - 1];
+            _currentIndexConstructionList = _constructionList.Count - 1;
+            UpdateUISelectedPlatform();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    
+
+    public bool AddAttackToList(int attackIndex)
+    {
+        BlueprintAttack currentAttackAdded = GameManager._instance.Blueprint.AttackList[attackIndex];
+
+        if (CheckIfAttackIsAlreadyActivated(currentAttackAdded) == false)
+        {
+            
+            _attackList.Add(currentAttackAdded);
+            currentAttackAdded.SetBlueprintAttackProperties();
+            _currentSelectedAttack = _attackList[_constructionList.Count - 1];
+            _currentIndexAttackList = _attackList.Count - 1;
+            UpdateUISelectedPlatform();
+
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private bool CheckIfConstructionIsAlreadyActivated(Construction constructionAdded)
+    {
+        for (int i = 0; i < _constructionList.Count; i++)
+        {
+            if (_constructionList[i].ConstructionIndex == constructionAdded.ConstructionIndex)
+            {
+
+                return true;
+            }
+            
+        }
+
+        return false;
+
+    }
+
+    private bool CheckIfAttackIsAlreadyActivated(BlueprintAttack attackAdded)
+    {
+        for (int i = 0; i < _attackList.Count ; i++)
+        {
+            if (_attackList[i].BlueprintAttackIndex == attackAdded.BlueprintAttackIndex)
+            {
+
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
+    private void SetBlueprintAttackProperties()
+    {
+        for (int i = 0; i < _attackList.Count; i++)
+        {
+            _attackList[i].SetBlueprintAttackProperties();
+        }
+
 
     }
 }

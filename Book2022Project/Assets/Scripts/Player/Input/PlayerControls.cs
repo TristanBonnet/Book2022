@@ -64,7 +64,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""IncrementConstructionIndex"",
+                    ""name"": ""IncrementAttackIndex"",
                     ""type"": ""Button"",
                     ""id"": ""95425e93-894e-4066-ba72-24f442100bb6"",
                     ""expectedControlType"": ""Button"",
@@ -73,7 +73,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DecrementConstructionIndex"",
+                    ""name"": ""IncrementConstructionIndex"",
                     ""type"": ""Button"",
                     ""id"": ""6ed26440-6f3e-458b-984e-bc82b87967e4"",
                     ""expectedControlType"": ""Button"",
@@ -85,6 +85,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""Construct"",
                     ""type"": ""Button"",
                     ""id"": ""117fc676-d59a-4b00-8757-bef604369d64"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BlueprintAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f1343aa1-04c7-478e-92e0-d5d1c05ebc45"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -319,7 +328,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""IncrementConstructionIndex"",
+                    ""action"": ""IncrementAttackIndex"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -330,7 +339,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""IncrementConstructionIndex"",
+                    ""action"": ""IncrementAttackIndex"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -341,7 +350,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DecrementConstructionIndex"",
+                    ""action"": ""IncrementConstructionIndex"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -352,7 +361,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""DecrementConstructionIndex"",
+                    ""action"": ""IncrementConstructionIndex"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -377,6 +386,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Construct"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb2538e4-e8dd-4c97-9a8b-f559730eee36"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BlueprintAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -389,9 +409,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovements_Camera = m_PlayerMovements.FindAction("Camera", throwIfNotFound: true);
         m_PlayerMovements_Jump = m_PlayerMovements.FindAction("Jump", throwIfNotFound: true);
         m_PlayerMovements_Attack = m_PlayerMovements.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerMovements_IncrementAttackIndex = m_PlayerMovements.FindAction("IncrementAttackIndex", throwIfNotFound: true);
         m_PlayerMovements_IncrementConstructionIndex = m_PlayerMovements.FindAction("IncrementConstructionIndex", throwIfNotFound: true);
-        m_PlayerMovements_DecrementConstructionIndex = m_PlayerMovements.FindAction("DecrementConstructionIndex", throwIfNotFound: true);
         m_PlayerMovements_Construct = m_PlayerMovements.FindAction("Construct", throwIfNotFound: true);
+        m_PlayerMovements_BlueprintAttack = m_PlayerMovements.FindAction("BlueprintAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,9 +476,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovements_Camera;
     private readonly InputAction m_PlayerMovements_Jump;
     private readonly InputAction m_PlayerMovements_Attack;
+    private readonly InputAction m_PlayerMovements_IncrementAttackIndex;
     private readonly InputAction m_PlayerMovements_IncrementConstructionIndex;
-    private readonly InputAction m_PlayerMovements_DecrementConstructionIndex;
     private readonly InputAction m_PlayerMovements_Construct;
+    private readonly InputAction m_PlayerMovements_BlueprintAttack;
     public struct PlayerMovementsActions
     {
         private @PlayerControls m_Wrapper;
@@ -466,9 +488,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_PlayerMovements_Camera;
         public InputAction @Jump => m_Wrapper.m_PlayerMovements_Jump;
         public InputAction @Attack => m_Wrapper.m_PlayerMovements_Attack;
+        public InputAction @IncrementAttackIndex => m_Wrapper.m_PlayerMovements_IncrementAttackIndex;
         public InputAction @IncrementConstructionIndex => m_Wrapper.m_PlayerMovements_IncrementConstructionIndex;
-        public InputAction @DecrementConstructionIndex => m_Wrapper.m_PlayerMovements_DecrementConstructionIndex;
         public InputAction @Construct => m_Wrapper.m_PlayerMovements_Construct;
+        public InputAction @BlueprintAttack => m_Wrapper.m_PlayerMovements_BlueprintAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovements; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -490,15 +513,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnAttack;
+                @IncrementAttackIndex.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementAttackIndex;
+                @IncrementAttackIndex.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementAttackIndex;
+                @IncrementAttackIndex.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementAttackIndex;
                 @IncrementConstructionIndex.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
                 @IncrementConstructionIndex.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
                 @IncrementConstructionIndex.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnIncrementConstructionIndex;
-                @DecrementConstructionIndex.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
-                @DecrementConstructionIndex.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
-                @DecrementConstructionIndex.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnDecrementConstructionIndex;
                 @Construct.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
                 @Construct.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
                 @Construct.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnConstruct;
+                @BlueprintAttack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
+                @BlueprintAttack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
+                @BlueprintAttack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
             }
             m_Wrapper.m_PlayerMovementsActionsCallbackInterface = instance;
             if (instance != null)
@@ -515,15 +541,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @IncrementAttackIndex.started += instance.OnIncrementAttackIndex;
+                @IncrementAttackIndex.performed += instance.OnIncrementAttackIndex;
+                @IncrementAttackIndex.canceled += instance.OnIncrementAttackIndex;
                 @IncrementConstructionIndex.started += instance.OnIncrementConstructionIndex;
                 @IncrementConstructionIndex.performed += instance.OnIncrementConstructionIndex;
                 @IncrementConstructionIndex.canceled += instance.OnIncrementConstructionIndex;
-                @DecrementConstructionIndex.started += instance.OnDecrementConstructionIndex;
-                @DecrementConstructionIndex.performed += instance.OnDecrementConstructionIndex;
-                @DecrementConstructionIndex.canceled += instance.OnDecrementConstructionIndex;
                 @Construct.started += instance.OnConstruct;
                 @Construct.performed += instance.OnConstruct;
                 @Construct.canceled += instance.OnConstruct;
+                @BlueprintAttack.started += instance.OnBlueprintAttack;
+                @BlueprintAttack.performed += instance.OnBlueprintAttack;
+                @BlueprintAttack.canceled += instance.OnBlueprintAttack;
             }
         }
     }
@@ -534,8 +563,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnIncrementAttackIndex(InputAction.CallbackContext context);
         void OnIncrementConstructionIndex(InputAction.CallbackContext context);
-        void OnDecrementConstructionIndex(InputAction.CallbackContext context);
         void OnConstruct(InputAction.CallbackContext context);
+        void OnBlueprintAttack(InputAction.CallbackContext context);
     }
 }

@@ -160,7 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf734300e9d0db743bc5f06cecfe776e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bumperForce: 30000
+  _scrapsCost: 5
+  _constructionSprite: {fileID: 21300000, guid: a7e6c9eb15bf17d4e83a8a9bea9c46dd, type: 3}
+  _isValid: 0
+  _constructionIndex: 1
+  _bumperForce: 15000
 --- !u!1 &5556572800789058486
 GameObject:
   m_ObjectHideFlags: 0

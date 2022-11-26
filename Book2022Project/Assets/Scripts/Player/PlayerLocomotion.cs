@@ -24,6 +24,8 @@ public class PlayerLocomotion : MonoBehaviour
     float _wallJumpZVelocity = 800;
     [SerializeField]
     float _wallJumpYVelocity = 1500;
+    [SerializeField]
+    Transform _startTransformGrounded = null;
    
 
 
@@ -182,6 +184,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         RaycastHit hit;
         Vector3 rayCastOrigin = transform.position;
+        Vector3 targetPosition = transform.position;
 
         rayCastOrigin.y = rayCastOrigin.y + rayCastHeightOffSet;
 
@@ -194,7 +197,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         }
         
-        if (Physics.Raycast(transform.position, Vector3.down,1.2f, _layerMask ))
+        if (Physics.Raycast(_startTransformGrounded.position, Vector3.down, out hit, 1.1f, _layerMask ))
         {
             if (_startDelayResetJump == false)
             {
@@ -203,14 +206,25 @@ public class PlayerLocomotion : MonoBehaviour
                 Debug.Log("RESET NUMBER");
                 _currentJumpNumber = 0;
             }
-            
-            
+
+            Vector3 rayCastHitPoint = hit.point;
+            targetPosition.y = rayCastHitPoint.y;
         }
 
         else
         {
             _playerState._currentState = PlayerState.GeneralState.InAir;
             
+        }
+
+        if (_playerState._currentState == PlayerState.GeneralState.Grounded)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.1f);
+        }
+
+        else
+        {
+            transform.position = targetPosition;
         }
     }
 

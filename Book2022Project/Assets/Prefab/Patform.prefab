@@ -62,6 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d023348f4c245b1489713d28cb7a02c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scrapsCost: 5
+  _constructionSprite: {fileID: 21300000, guid: a6ef2b8cc42767f45827e1c8ce05d1c3, type: 3}
 --- !u!1 &2784468800035069325
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,8 +24,9 @@ public class InputPlayer : MonoBehaviour
     public bool _jump;
     public bool _classicAttackActive = false;
     public bool _incrementConstructionIndex = false;
-    public bool _decrementConstructionIndex = false;
+    public bool _incrementAttackIndex = false;
     public bool _construct = false;
+    public bool _blueprintAttack = false;
 
 
     private float _moveAmount;
@@ -41,8 +42,9 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.Jump.performed += i => _jump = true;
             _playerControls.PlayerMovements.Attack.performed += i => _classicAttackActive = true;
             _playerControls.PlayerMovements.IncrementConstructionIndex.performed += i => _incrementConstructionIndex = true;
-            _playerControls.PlayerMovements.DecrementConstructionIndex.performed += i => _decrementConstructionIndex = true;
+            _playerControls.PlayerMovements.IncrementAttackIndex.performed += i => _incrementAttackIndex = true;
             _playerControls.PlayerMovements.Construct.performed += i => _construct = true;
+            _playerControls.PlayerMovements.BlueprintAttack.performed += i => _blueprintAttack = true;
 
 
         }
@@ -74,6 +76,7 @@ public class InputPlayer : MonoBehaviour
         HandleJumpInput();
         HandleClassicAttackInput();
         HandleConstructionInputs();
+        
 
     }
 
@@ -107,7 +110,7 @@ public class InputPlayer : MonoBehaviour
         if (_incrementConstructionIndex)
         {
             _incrementConstructionIndex = false;
-            _playerPlatformManager.ChangeConstructionList(true);
+            _playerPlatformManager.ChangeConstructionList();
             
         }
 
@@ -115,13 +118,15 @@ public class InputPlayer : MonoBehaviour
 
     }
 
-    private void HandleDecrementConstructionIndex()
+    private void HandleIncrementAttackIndex()
     {
-        if (_decrementConstructionIndex)
+        if (_incrementAttackIndex)
         {
-            _decrementConstructionIndex = false;
-            _playerPlatformManager.ChangeConstructionList(false);
+            _incrementAttackIndex = false;
+            _playerPlatformManager.ChangeAttackList();
+
         }
+
 
     }
 
@@ -130,7 +135,21 @@ public class InputPlayer : MonoBehaviour
         if (_construct)
         {
             _construct = false;
-            _playerPlatformManager.ConstructPlatform();
+            _playerPlatformManager.CheckConstructionCost();
+        }
+
+
+    }
+
+    private void HandleBlueprintAttack()
+    {
+        
+        if (_blueprintAttack)
+        {
+            
+            _blueprintAttack = false;
+            _playerPlatformManager.CheckAttackCost();
+            
         }
 
 
@@ -139,8 +158,9 @@ public class InputPlayer : MonoBehaviour
     private void HandleConstructionInputs()
     {
         HandleIncrementConstructionIndex();
-        HandleDecrementConstructionIndex();
+        HandleIncrementAttackIndex();
         HandleConstruct();
+        HandleBlueprintAttack();
 
     }
 }
