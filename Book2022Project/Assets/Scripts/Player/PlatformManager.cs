@@ -230,7 +230,7 @@ public class PlatformManager : MonoBehaviour
             
             _attackList.Add(currentAttackAdded);
             currentAttackAdded.SetBlueprintAttackProperties();
-            _currentSelectedAttack = _attackList[_constructionList.Count - 1];
+            _currentSelectedAttack = _attackList[_attackList.Count - 1];
             _currentIndexAttackList = _attackList.Count - 1;
             UpdateUISelectedPlatform();
 

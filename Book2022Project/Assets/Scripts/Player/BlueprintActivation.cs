@@ -40,7 +40,10 @@ public class BlueprintActivation : MonoBehaviour
                     break;
                 case BlueprintType.Attack:
                     {
-                        // Add activation attack
+                        if (platformManager.AddAttackToList(_blueprintActivationIndex))
+                        {
+                            Destroy(gameObject);
+                        }
 
                     }
                     break;

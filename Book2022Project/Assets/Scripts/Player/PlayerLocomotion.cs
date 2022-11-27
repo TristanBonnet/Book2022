@@ -147,7 +147,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (_playerState._currentState == PlayerState.GeneralState.Grounded)
         {
-            Debug.Log("PLAYER GROUNDED");
+            
             Jump();
         }
 
@@ -155,6 +155,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (currentGameObjectFrontOfPlayer != null)
             {
+                Debug.Log("WALL JUMP");
                 WallJump();
             }
 
@@ -231,7 +232,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void WallJump()
     {
         _playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
-        _playerRigibody.AddForce(-Vector3.forward * _wallJumpZVelocity);
+        _playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);
 
 
     }
