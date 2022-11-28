@@ -26,6 +26,8 @@ public class PlayerLocomotion : MonoBehaviour
     float _wallJumpYVelocity = 1500;
     [SerializeField]
     Transform _startTransformGrounded = null;
+    [SerializeField]
+    Animator _playerLocomotionAnimator = null;
    
 
 
@@ -56,6 +58,7 @@ public class PlayerLocomotion : MonoBehaviour
     private float inAirTimer = 0;
 
     Vector3 _moveDirection;
+    private bool SetGroundedAnimTrigger = false;
 
     
 
@@ -111,6 +114,10 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 movementVelocity = _moveDirection;
         _playerRigibody.velocity = movementVelocity;
 
+        float currentSpeed = movementVelocity.magnitude;
+        Debug.Log(currentSpeed);
+        _playerLocomotionAnimator.SetFloat("Blend", currentSpeed);
+
     }
 
     private void HandleRotation()
@@ -155,7 +162,7 @@ public class PlayerLocomotion : MonoBehaviour
         {
             if (currentGameObjectFrontOfPlayer != null)
             {
-                Debug.Log("WALL JUMP");
+               
                 WallJump();
             }
 
@@ -206,6 +213,12 @@ public class PlayerLocomotion : MonoBehaviour
                 _playerState._currentState = PlayerState.GeneralState.Grounded;
                 Debug.Log("RESET NUMBER");
                 _currentJumpNumber = 0;
+                if (SetGroundedAnimTrigger == true)
+                {
+                    _playerLocomotionAnimator.SetTrigger("Grounded");
+                    SetGroundedAnimTrigger = false;
+                }
+               
             }
 
             Vector3 rayCastHitPoint = hit.point;
@@ -233,6 +246,8 @@ public class PlayerLocomotion : MonoBehaviour
     {
         _playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
         _playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);
+        _playerLocomotionAnimator.SetTrigger("Jump");
+        SetGroundedAnimTrigger = true;
 
 
     }
@@ -242,6 +257,8 @@ public class PlayerLocomotion : MonoBehaviour
         
         _playerRigibody.AddForce(Vector3.up * _jumpVelocity);
         _currentJumpNumber += 1;
+        _playerLocomotionAnimator.SetTrigger("Jump");
+        SetGroundedAnimTrigger = true;
         _startDelayResetJump = true;
     }
 

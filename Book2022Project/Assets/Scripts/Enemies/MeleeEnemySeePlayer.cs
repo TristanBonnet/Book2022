@@ -13,6 +13,20 @@ public class MeleeEnemySeePlayer : SeePlayer
     [SerializeField]
     private EnemyDamage _enemyDamage = null;
 
+    [SerializeField]
+    Rigidbody _playerRigibody = null;
+
+    [SerializeField]
+    float _attackForce = 100;
+
+    public enum SeePlayerSubState
+
+    {
+        Wait,
+        Attack
+
+
+    }
     
 
     private void FixedUpdate()
@@ -48,15 +62,24 @@ public class MeleeEnemySeePlayer : SeePlayer
 
                 else
                 {
-
+                    AttackPlayer();
                     _enemyDamage.DoDamage();
-
                     _currentDelayBetweenAttacks = 0;
                 }
             }
 
         }
         
+    }
+
+
+    private void AttackPlayer()
+    {
+        Vector3 currentVelocity = transform.forward * _attackForce;
+        _playerRigibody.AddForce(currentVelocity);
+        
+
+
     }
 
     

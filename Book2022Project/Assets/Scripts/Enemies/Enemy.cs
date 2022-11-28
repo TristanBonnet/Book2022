@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
     }
     public void GetNextPathPoint()
     {
-        Debug.Log("INCREMENT PATH POINT INDEX");
+        
         _currentPathPointIndex += 1;
 
         if (_currentPathPointIndex > _pathPointList.Count - 1)
@@ -283,7 +283,7 @@ public class Enemy : MonoBehaviour
 
     public void SetDeadState()
     {
-        Debug.Log("DESTROY ENEMY");
+        
         if (_ressourcesSpawner != null)
         {
             _ressourcesSpawner.SpawnRessource();
