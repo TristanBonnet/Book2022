@@ -7709,31 +7709,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963047126}
   m_CullTransparentMesh: 1
---- !u!1 &987356043 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4257673364478882513, guid: a986543ab41b19f45ad4a71370248833, type: 3}
-  m_PrefabInstance: {fileID: 69681354594483797}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &987356045
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 987356043}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f37c499bf56da64f911ec20ed043cfa, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &998849401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11494,10 +11469,6 @@ PrefabInstance:
       propertyPath: _cameraObject
       value: 
       objectReference: {fileID: 2060012365}
-    - target: {fileID: 69681354460280296, guid: a986543ab41b19f45ad4a71370248833, type: 3}
-      propertyPath: _playerLocomotionAnimator
-      value: 
-      objectReference: {fileID: 987356045}
     - target: {fileID: 69681354460280297, guid: a986543ab41b19f45ad4a71370248833, type: 3}
       propertyPath: _cameraManager
       value: 

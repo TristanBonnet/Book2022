@@ -19,6 +19,9 @@ public class MeleeEnemySeePlayer : SeePlayer
     [SerializeField]
     float _attackForce = 100;
 
+    [SerializeField]
+    Animator _enemyMeleeAnimator = null;
+
     public enum SeePlayerSubState
 
     {
@@ -75,10 +78,8 @@ public class MeleeEnemySeePlayer : SeePlayer
 
     private void AttackPlayer()
     {
-        Vector3 currentVelocity = transform.forward * _attackForce;
-        _playerRigibody.AddForce(currentVelocity);
+        _enemyMeleeAnimator.SetTrigger("Attack");
         
-
 
     }
 
