@@ -27,6 +27,11 @@ public class Enemy : MonoBehaviour
     SeePlayer _seePlayer = null;
     [SerializeField]
     UnityEvent _event = null;
+    [SerializeField]
+    Animator _enemyAnimator = null;
+    [SerializeField]
+    Billboard _enemyBillboard = null;
+    
     
 
 
@@ -75,7 +80,10 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        if (_enemyAnimator != null)
+        {
+            _enemyAnimator.SetFloat("Velocity", _enemyRigibody.velocity.magnitude);        }
+        
         if (isDead == false)
         {
             switch (_enemyState)
@@ -139,6 +147,9 @@ public class Enemy : MonoBehaviour
                         if (_seePlayer.enabled == false)
                         {
                             _seePlayer.enabled = true;
+                            Debug.Log("SEE PLAYER");
+                            _enemyBillboard.gameObject.SetActive(true);
+                            
                         }
                         //RotateEnemyToTarget(_aiSensor._player.transform);
                         //MoveToTarget();

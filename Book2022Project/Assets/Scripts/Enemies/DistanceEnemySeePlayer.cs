@@ -12,6 +12,9 @@ public class DistanceEnemySeePlayer : SeePlayer
     [SerializeField]
     private Transform _projectileStartTransform = null;
 
+    [SerializeField]
+    protected private Billboard _billboard = null;
+
     private void FixedUpdate()
     {
         if (_enemy != null && _enemy.AISensor._player)
@@ -49,4 +52,8 @@ public class DistanceEnemySeePlayer : SeePlayer
 
 
     }
+
+    
 }
+
+

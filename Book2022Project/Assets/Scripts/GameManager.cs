@@ -15,8 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     BlueprintManager _blueprintManager = null;
 
+    [SerializeField]
+    private Camera _camera = null;
+
+
     public PlayerManager PlayerManager => _playerManager;
     public UIManager UIManager => _uiManager;
+
+    public Camera Camera => _camera;
 
     public BlueprintManager Blueprint => _blueprintManager;
 

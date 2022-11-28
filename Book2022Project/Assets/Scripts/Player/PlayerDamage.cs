@@ -15,7 +15,7 @@ public class PlayerDamage : MonoBehaviour
         if (_enemy != null && _health != null)
         {
 
-            _health.RemoveHealthPoint(_damage);
+            _health.RemoveHealthPoint(_damage, this.gameObject);
 
         }
     }

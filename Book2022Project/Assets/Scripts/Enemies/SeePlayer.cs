@@ -8,6 +8,7 @@ public class SeePlayer : MonoBehaviour
 
     [SerializeField]
     protected private float _delayBetweenAttacks;
+    
     protected private float _currentDelayBetweenAttacks;
 
 
@@ -19,5 +20,5 @@ public class SeePlayer : MonoBehaviour
         _enemy = GetComponentInParent<Enemy>();
     }
 
-    
+
 }

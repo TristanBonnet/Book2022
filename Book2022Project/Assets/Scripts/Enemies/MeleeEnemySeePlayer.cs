@@ -22,6 +22,8 @@ public class MeleeEnemySeePlayer : SeePlayer
     [SerializeField]
     Animator _enemyMeleeAnimator = null;
 
+    [SerializeField]
+    protected private Billboard _billboard = null;
     public enum SeePlayerSubState
 
     {
@@ -84,4 +86,5 @@ public class MeleeEnemySeePlayer : SeePlayer
     }
 
     
+
 }

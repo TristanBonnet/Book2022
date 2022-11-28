@@ -25,11 +25,12 @@ public class HealthManager : MonoBehaviour
         UpdateUIManager();
     }
 
-    public void RemoveHealthPoint(int HealthRemoved)
+    public void RemoveHealthPoint(int HealthRemoved, GameObject sender)
     {
         if (_currentHealthPoint > 0)
         {
             _currentHealthPoint -= HealthRemoved;
+            
 
             if (_currentHealthPoint < 0)
             {
@@ -62,6 +63,7 @@ public class HealthManager : MonoBehaviour
         {
 
             GameManager._instance.UIManager.UpdateRingText();
+            playerManager.PlayerLocomotion.PlayerRigibody.AddForce(Vector3.up * 1500);
 
         }
 

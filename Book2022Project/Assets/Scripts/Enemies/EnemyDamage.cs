@@ -7,8 +7,11 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField]
     int _damageDealed = 1;
 
+    public bool _doDamage = true;
+
     private PlayerManager _player = null;
     private HealthManager _playerHealthManager = null;
+    
 
     public PlayerManager Player => _player;
     public HealthManager PlayerHealthManager => _playerHealthManager;
@@ -28,7 +31,15 @@ public class EnemyDamage : MonoBehaviour
         {
             _player = player;
             _playerHealthManager = playerHealthManager;
-            DoDamage();
+
+            if (_doDamage)
+            {
+                _playerHealthManager.RemoveHealthPoint(_damageDealed, this.gameObject);
+                
+                _doDamage = false;
+            }
+            
+            
             
         }
     }
@@ -41,15 +52,14 @@ public class EnemyDamage : MonoBehaviour
         if (player != null && playerHealthManager != null)
         {
             _player = null;
-            _playerHealthManager = playerHealthManager;
+            _playerHealthManager = null;
         }
     }
 
     public void DoDamage()
     {
 
-        _playerHealthManager.RemoveHealthPoint(_damageDealed);
-
+        
 
     }
 }
