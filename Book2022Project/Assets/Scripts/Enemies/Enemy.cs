@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     Billboard _enemyBillboard = null;
     [SerializeField]
     float _maxStunTime = 2;
+    [SerializeField]
+    ParticleSystem _deadParticle = null;
 
     private bool stun = false;
 
@@ -172,6 +174,7 @@ public class Enemy : MonoBehaviour
                             _seePlayer.enabled = true;
                             Debug.Log("SEE PLAYER");
                             _enemyBillboard.gameObject.SetActive(true);
+                            _enemyBillboard.SetSprite(0);
                             
                         }
                         //RotateEnemyToTarget(_aiSensor._player.transform);
@@ -323,7 +326,8 @@ public class Enemy : MonoBehaviour
             _ressourcesSpawner.SpawnRessource();
         }
 
-
+        ParticleSystem particle = Instantiate<ParticleSystem>(_deadParticle);
+        particle.transform.position = transform.position;
         Destroy(this.gameObject);
 
     }
@@ -333,6 +337,8 @@ public class Enemy : MonoBehaviour
     {
         stun = true;
         _seePlayer.enabled = false;
+        _enemyBillboard.SetSprite(1);
+        _enemyAnimator.SetTrigger("Stun");
         if (_enemyState != EnemyState.SeePlayer)
         {
             _enemyState = EnemyState.SeePlayer;

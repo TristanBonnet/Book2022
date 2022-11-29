@@ -24,7 +24,7 @@ public class StunEnemy : MonoBehaviour
 
                 if (_playerRigibody != null)
                 {
-                    _playerRigibody.AddForce(Vector3.up * 1000);
+                    _playerRigibody.AddForce(Vector3.up * 5000);
                 }
 
             }

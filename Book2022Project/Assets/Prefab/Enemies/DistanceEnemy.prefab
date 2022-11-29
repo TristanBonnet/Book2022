@@ -97,6 +97,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86cc6b7b212c5894fae7650ff12bb3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteList:
+  - {fileID: 21300000, guid: 67af81d6d6f6a6945bc1499f33898462, type: 3}
+  - {fileID: 21300000, guid: aac81acb4c0d2944e99fc2838d98fd25, type: 3}
+  _currentSprite: {fileID: 631068472}
+--- !u!1 &1649062709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649062710}
+  - component: {fileID: 1649062712}
+  - component: {fileID: 1649062711}
+  m_Layer: 7
+  m_Name: EnemyUpComponent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1649062710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649062709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6686014799992324090}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1649062712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649062709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.05, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1649062711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649062709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0bd27eac0efca4cb739edda3653afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6686014798512697357
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6686014799688786525}
+  - component: {fileID: 1129247260}
   m_Layer: 7
   m_Name: EnemyMesh
   m_TagString: Untagged
@@ -306,6 +369,26 @@ Transform:
   m_Father: {fileID: 6686014799992324090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1129247260
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686014799688786526}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2330ce8d64fec2342af1a2d2b3401641, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6686014799992324094
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +425,7 @@ Transform:
   - {fileID: 6686014799258053535}
   - {fileID: 6686014798844867161}
   - {fileID: 631068471}
+  - {fileID: 1649062710}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -387,9 +471,10 @@ MonoBehaviour:
   _event:
     m_PersistentCalls:
       m_Calls: []
-  _enemyAnimator: {fileID: 0}
+  _enemyAnimator: {fileID: 1129247260}
   _enemyBillboard: {fileID: 631068473}
   _maxStunTime: 2
+  _deadParticle: {fileID: 1450793548800527331, guid: b9f2ee804febea241b4822ff3bdef2d9, type: 3}
   _currentPathPointIndex: 0
   _enemyState: 0
   _patrolSubState: 0
@@ -409,6 +494,7 @@ MonoBehaviour:
   _projectile: {fileID: 6898888379090039733, guid: 79e96d22adcf7bc4da8944ad4fb9cfab, type: 3}
   _projectileStartTransform: {fileID: 6686014798844867161}
   _billboard: {fileID: 631068473}
+  _animator: {fileID: 1129247260}
 --- !u!114 &3404487777361567925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +520,7 @@ GameObject:
   - component: {fileID: 6686014800096016796}
   - component: {fileID: 6686014800096016794}
   - component: {fileID: 6686014800096016795}
+  - component: {fileID: 1719655972}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -506,6 +593,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1719655972
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686014800096016797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6686014800224810880
 GameObject:
   m_ObjectHideFlags: 0

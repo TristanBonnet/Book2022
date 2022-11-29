@@ -397,6 +397,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""BlueprintAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""189449a3-2580-4a8a-a571-bdde598d2ec5"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BlueprintAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }

@@ -30,8 +30,11 @@ public class PlayerLocomotion : MonoBehaviour
     Animator _playerLocomotionAnimator = null;
     [SerializeField]
     LayerMask _enemyLayer;
-   
+    [SerializeField]
+    ParticleSystem _particle = null;
 
+    [SerializeField]
+    List<ParticleSystem> _playerParticlesList = null;
 
 
     [SerializeField]
@@ -99,6 +102,36 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 currentGameObjectFrontOfPlayer = null;
             }
+        }
+
+        if (_playerState._currentState == PlayerState.GeneralState.Grounded && _playerRigibody.velocity.magnitude > 0.1f)
+        {
+            Debug.Log(_particle.isPlaying);
+           
+            
+                if (_particle.isPlaying == false)
+                {
+                    Debug.Log("PLAY PARTICLES");
+                    _particle.Play();
+
+
+                
+                }
+                
+                
+            
+           
+        }
+        else
+        {
+            if (_particle.isStopped == false)
+            {
+                Debug.Log("STOP");
+                
+                _particle.Stop();
+                
+            } 
+            
         }
 
         //Debug.Log(currentGameObjectFrontOfPlayer);
@@ -252,6 +285,7 @@ public class PlayerLocomotion : MonoBehaviour
                 _currentJumpNumber = 0;
                 if (SetGroundedAnimTrigger == true)
                 {
+                    InstantiateParticle(transform, _playerParticlesList[1]);
                     _playerLocomotionAnimator.SetTrigger("Grounded");
                     SetGroundedAnimTrigger = false;
                 }
@@ -303,8 +337,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void Jump()
     {
-        
+
         //_playerRigibody.velocity = Vector3.up * _jumpVelocity;
+
+        InstantiateParticle(transform, _playerParticlesList[0]);
         _playerJump.enabled = true;
         _currentJumpNumber += 1;
         _playerLocomotionAnimator.SetTrigger("Jump");
@@ -330,6 +366,14 @@ public class PlayerLocomotion : MonoBehaviour
 
         }
 
+
+
+    }
+
+    private void InstantiateParticle(Transform transform, ParticleSystem particle)
+    {
+        ParticleSystem currentParticleSpawned = Instantiate<ParticleSystem>(particle);
+        currentParticleSpawned.transform.position = transform.position;
 
 
     }

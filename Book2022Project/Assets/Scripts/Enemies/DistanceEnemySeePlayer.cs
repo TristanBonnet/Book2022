@@ -15,6 +15,9 @@ public class DistanceEnemySeePlayer : SeePlayer
     [SerializeField]
     protected private Billboard _billboard = null;
 
+    [SerializeField]
+    private Animator _animator = null;
+
     private void FixedUpdate()
     {
         if (_enemy != null && _enemy.AISensor._player)
@@ -44,6 +47,7 @@ public class DistanceEnemySeePlayer : SeePlayer
 
     private void Attack()
     {
+        _animator.SetTrigger("Shot");
       EnemyProjectileMovement projectile =   Instantiate<EnemyProjectileMovement>(_projectile);
         projectile.transform.position = _projectileStartTransform.position;
         projectile.transform.rotation = transform.rotation;
