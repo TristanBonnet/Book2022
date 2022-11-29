@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 667266078}
   - component: {fileID: 667266077}
   - component: {fileID: 667266076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1128081928}
   - component: {fileID: 1128081930}
   - component: {fileID: 1128081929}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8398900423389773299}
   - component: {fileID: 901723315}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 8398900423785168312}
   - component: {fileID: 8398900423785168315}
   - component: {fileID: 8398900423785168314}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyColliderDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 8398900423885997360}
   - component: {fileID: 8398900423885997365}
   - component: {fileID: 8398900423885997362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 8398900424105653737}
   - component: {fileID: 8398900424105653736}
   - component: {fileID: 8398900424105653739}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 8398900424172880951}
   - component: {fileID: 8398900424172880952}
   - component: {fileID: 8398900424172880953}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 8398900424699653620}
   - component: {fileID: 8398900424699653623}
   - component: {fileID: 1558849213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeleeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,6 +610,7 @@ MonoBehaviour:
       m_Calls: []
   _enemyAnimator: {fileID: 901723315}
   _enemyBillboard: {fileID: 667266076}
+  _maxStunTime: 2
   _currentPathPointIndex: 0
   _enemyState: 0
   _patrolSubState: 0
