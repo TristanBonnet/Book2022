@@ -28,6 +28,8 @@ public class PlayerLocomotion : MonoBehaviour
     Transform _startTransformGrounded = null;
     [SerializeField]
     Animator _playerLocomotionAnimator = null;
+    [SerializeField]
+    LayerMask _enemyLayer;
    
 
 
@@ -46,6 +48,8 @@ public class PlayerLocomotion : MonoBehaviour
     float _airControl = 1;
     [SerializeField]
     Collider _collider = null;
+    [SerializeField]
+    QueryTriggerInteraction queryTriggerInteraction;
 
     public int _currentJumpNumber = 0;
     private GameObject currentGameObjectFrontOfPlayer = null;
@@ -123,7 +127,7 @@ public class PlayerLocomotion : MonoBehaviour
             _playerRigibody.velocity = movementVelocity;
 
             float currentSpeed = movementVelocity.magnitude;
-            Debug.Log(currentSpeed);
+           
             _playerLocomotionAnimator.SetFloat("Blend", currentSpeed);
         }
 
@@ -223,6 +227,7 @@ public class PlayerLocomotion : MonoBehaviour
                 else
                 {
                     _playerState._currentInAirSubState = PlayerState.InAirSubState.Falling;
+                    CheckEnemy();
                 }
 
                 _lastYPosition = transform.position.y;
@@ -237,7 +242,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 inAirTimer = 0;
                 _playerState._currentState = PlayerState.GeneralState.Grounded;
-                Debug.Log("RESET NUMBER");
+                
                 _currentJumpNumber = 0;
                 if (SetGroundedAnimTrigger == true)
                 {
@@ -272,10 +277,21 @@ public class PlayerLocomotion : MonoBehaviour
     {
         //_playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
         //_playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);*
-        _wallJump.enabled = true;
-        inAirTimer = 0;
-        _playerLocomotionAnimator.SetTrigger("Jump");
-        SetGroundedAnimTrigger = true;
+
+        if (_wallJump.enabled == false)
+        {
+            _wallJump.enabled = true;
+            inAirTimer = 0;
+            _playerLocomotionAnimator.SetTrigger("Jump");
+            SetGroundedAnimTrigger = true;
+
+            if (_playerJump.enabled == true)
+            {
+                _playerJump.enabled = false;
+            }
+        }
+        
+        
 
 
     }
@@ -289,6 +305,28 @@ public class PlayerLocomotion : MonoBehaviour
         _playerLocomotionAnimator.SetTrigger("Jump");
         SetGroundedAnimTrigger = true;
         _startDelayResetJump = true;
+    }
+
+    private void CheckEnemy()
+    {
+        Debug.Log("CHECKENEMY");
+        RaycastHit hit;
+        if (Physics.Raycast(_startTransformGrounded.position, Vector3.down, out hit, 1.1f, _enemyLayer,  queryTriggerInteraction))
+        {
+
+            Enemy enemy = hit.collider.GetComponentInChildren<Enemy>();
+
+            if (enemy != null)
+            {
+                Debug.Log("HITENEMY");
+                enemy.StunEnemy();
+                _playerRigibody.AddForce(Vector3.up * 1000);
+            }
+
+        }
+
+
+
     }
 
 }

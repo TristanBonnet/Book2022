@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 631068471}
   - component: {fileID: 631068472}
   - component: {fileID: 631068473}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6686014798512697356}
   - component: {fileID: 6686014798512697354}
   - component: {fileID: 6686014798512697355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6686014798844867161}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ProjectileStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 6686014799258053535}
   - component: {fileID: 6686014799258053504}
   - component: {fileID: 6686014799258053505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6686014799688786525}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 6686014799992324092}
   - component: {fileID: 6686014799992324089}
   - component: {fileID: 3404487777361567925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DistanceEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,6 +389,7 @@ MonoBehaviour:
       m_Calls: []
   _enemyAnimator: {fileID: 0}
   _enemyBillboard: {fileID: 631068473}
+  _maxStunTime: 2
   _currentPathPointIndex: 0
   _enemyState: 0
   _patrolSubState: 0
@@ -433,7 +434,7 @@ GameObject:
   - component: {fileID: 6686014800096016796}
   - component: {fileID: 6686014800096016794}
   - component: {fileID: 6686014800096016795}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +518,7 @@ GameObject:
   - component: {fileID: 6686014800224810909}
   - component: {fileID: 6686014800224810911}
   - component: {fileID: 112553134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

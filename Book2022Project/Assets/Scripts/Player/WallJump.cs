@@ -40,6 +40,7 @@ public class WallJump : MonoBehaviour
     private void OnEnable()
     {
         _currentJumpTime = 0;
+        _playerRigibody.velocity = new Vector3(0, 0, 0);
     }
 
     
