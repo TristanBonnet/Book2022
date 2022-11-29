@@ -27848,6 +27848,10 @@ PrefabInstance:
       value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 69681354460280215, guid: a986543ab41b19f45ad4a71370248833, type: 3}
+      propertyPath: YVelocity
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 69681354460280215, guid: a986543ab41b19f45ad4a71370248833, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
