@@ -31,10 +31,15 @@ public class Enemy : MonoBehaviour
     Animator _enemyAnimator = null;
     [SerializeField]
     Billboard _enemyBillboard = null;
-    
-    
+    [SerializeField]
+    float _maxStunTime = 2;
+
+    private bool stun = false;
 
 
+
+
+    private float _currentStunTime = 0;
     private Rigidbody _enemyRigibody = null;
     private PathPoint _currentPathPoint = null;
     private float _currentWaitingTime = 0;
@@ -60,6 +65,8 @@ public class Enemy : MonoBehaviour
 
     }
 
+
+
     private void Awake()
     {
 
@@ -82,9 +89,25 @@ public class Enemy : MonoBehaviour
     {
         if (_enemyAnimator != null)
         {
-            _enemyAnimator.SetFloat("Velocity", _enemyRigibody.velocity.magnitude);        }
-        
-        if (isDead == false)
+            _enemyAnimator.SetFloat("Velocity", _enemyRigibody.velocity.magnitude);       
+        }
+
+        if (stun == true)
+        {
+            if (_currentStunTime < _maxStunTime)
+            {
+                _currentStunTime += Time.deltaTime;
+            }
+
+            else
+            {
+                stun = false;
+                _currentStunTime = 0;
+                
+            }
+        }
+
+        if (isDead == false && stun == false)
         {
             switch (_enemyState)
             {
@@ -302,6 +325,20 @@ public class Enemy : MonoBehaviour
 
 
         Destroy(this.gameObject);
+
+    }
+
+
+    public void StunEnemy()
+    {
+        stun = true;
+        _seePlayer.enabled = false;
+        if (_enemyState != EnemyState.SeePlayer)
+        {
+            _enemyState = EnemyState.SeePlayer;
+        }
+
+
 
     }
 }

@@ -42,8 +42,5 @@ public class WallJump : MonoBehaviour
         _currentJumpTime = 0;
     }
 
-    private void OnDisable()
-    {
-        _playerState._currentInAirSubState = PlayerState.InAirSubState.Falling;
-    }
+    
 }

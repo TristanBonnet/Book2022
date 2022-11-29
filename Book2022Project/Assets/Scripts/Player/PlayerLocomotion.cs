@@ -54,13 +54,17 @@ public class PlayerLocomotion : MonoBehaviour
     private float _maxTimeReset = 0.1f;
     private float _currentTimeReset = 0;
     private bool _startDelayResetJump = false;
+    private bool _checkGrounded = true;
 
     private float inAirTimer = 0;
+
+    private float _lastYPosition = 0;
+    
 
     Vector3 _moveDirection;
     private bool SetGroundedAnimTrigger = false;
 
-    
+    //public IEnumerator
 
     private void Update()
     {
@@ -111,12 +115,19 @@ public class PlayerLocomotion : MonoBehaviour
         _moveDirection.y = 0;
         _moveDirection = _moveDirection * _playerWalkSpeed;
 
-        Vector3 movementVelocity = _moveDirection;
-        _playerRigibody.velocity = movementVelocity;
+        if (_wallJump.enabled == false)
+        {
 
-        float currentSpeed = movementVelocity.magnitude;
-        Debug.Log(currentSpeed);
-        _playerLocomotionAnimator.SetFloat("Blend", currentSpeed);
+
+            Vector3 movementVelocity = _moveDirection;
+            _playerRigibody.velocity = movementVelocity;
+
+            float currentSpeed = movementVelocity.magnitude;
+            Debug.Log(currentSpeed);
+            _playerLocomotionAnimator.SetFloat("Blend", currentSpeed);
+        }
+
+        
 
     }
 
@@ -201,6 +212,21 @@ public class PlayerLocomotion : MonoBehaviour
             inAirTimer += Time.deltaTime;
             _playerRigibody.AddForce(transform.forward * _leapingVelocity);
             _playerRigibody.AddForce(-Vector3.up * _fallingVelocity * inAirTimer);
+
+            if (_playerState._currentState == PlayerState.GeneralState.InAir)
+            {
+                if (transform.position.y > _lastYPosition)
+                {
+                    _playerState._currentInAirSubState = PlayerState.InAirSubState.Jumping;
+                }
+
+                else
+                {
+                    _playerState._currentInAirSubState = PlayerState.InAirSubState.Falling;
+                }
+
+                _lastYPosition = transform.position.y;
+            }
             
 
         }
@@ -244,8 +270,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void WallJump()
     {
-        _playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
-        _playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);
+        //_playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
+        //_playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);*
+        _wallJump.enabled = true;
+        inAirTimer = 0;
         _playerLocomotionAnimator.SetTrigger("Jump");
         SetGroundedAnimTrigger = true;
 
@@ -255,7 +283,8 @@ public class PlayerLocomotion : MonoBehaviour
     private void Jump()
     {
         
-        _playerRigibody.AddForce(Vector3.up * _jumpVelocity);
+        //_playerRigibody.velocity = Vector3.up * _jumpVelocity;
+        _playerJump.enabled = true;
         _currentJumpNumber += 1;
         _playerLocomotionAnimator.SetTrigger("Jump");
         SetGroundedAnimTrigger = true;
