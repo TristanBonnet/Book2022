@@ -148,10 +148,16 @@ public class PlayerLocomotion : MonoBehaviour
             targetDirection = transform.forward;
         }
 
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-        Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        if (_wallJump.enabled == false)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            transform.rotation = playerRotation;
 
-        transform.rotation = playerRotation;
+        }
+
+
+        
     }
 
 
@@ -278,8 +284,7 @@ public class PlayerLocomotion : MonoBehaviour
         //_playerRigibody.AddForce(Vector3.up * _wallJumpYVelocity);
         //_playerRigibody.AddForce(-transform.forward * _wallJumpZVelocity);*
 
-        if (_wallJump.enabled == false)
-        {
+        
             _wallJump.enabled = true;
             inAirTimer = 0;
             _playerLocomotionAnimator.SetTrigger("Jump");
@@ -289,7 +294,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 _playerJump.enabled = false;
             }
-        }
+        
         
         
 
