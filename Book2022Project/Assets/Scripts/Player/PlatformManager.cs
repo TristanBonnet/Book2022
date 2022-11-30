@@ -80,10 +80,10 @@ public class PlatformManager : MonoBehaviour
 
     public void ChangeAttackList()
     {
-
+        Debug.Log("CHANGE ATTACK INDEX");
         if (_attackList.Count > 0)
         {
-            _currentIndexAttackList+= 1;
+            _currentIndexAttackList += 1;
 
             if (_currentIndexAttackList > _attackList.Count - 1)
             {
@@ -92,10 +92,11 @@ public class PlatformManager : MonoBehaviour
 
 
 
-            _currentSelectedAttack=  _attackList[_currentIndexAttackList];
+            _currentSelectedAttack =  _attackList[_currentIndexAttackList];
 
             if (_currentSelectedAttack != null)
             {
+                
                 UpdateUISelectedAttack();
             }
 
@@ -190,8 +191,8 @@ public class PlatformManager : MonoBehaviour
         {
             GameManager._instance.UIManager.UpdateConstructionPicture(_currentSelectedPlatform.ConstructionSprite);
         }
-        
 
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
     }
 
     private void UpdateUISelectedAttack()
@@ -199,7 +200,10 @@ public class PlatformManager : MonoBehaviour
         if (_currentSelectedAttack != null)
         {
             // ADD UPDATE ATATCK PICTURE IN UI MANAGER
+            
         }
+
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
     }
 
     public bool AddConstructionToList(int constructionIndex)
@@ -232,7 +236,7 @@ public class PlatformManager : MonoBehaviour
             currentAttackAdded.SetBlueprintAttackProperties();
             _currentSelectedAttack = _attackList[_attackList.Count - 1];
             _currentIndexAttackList = _attackList.Count - 1;
-            UpdateUISelectedPlatform();
+            UpdateUISelectedAttack();
 
             return true;
         }

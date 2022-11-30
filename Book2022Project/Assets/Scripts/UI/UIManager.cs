@@ -37,6 +37,21 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI _maxScrapContainor = null;
     [SerializeField]
     TextMeshProUGUI _maxGoldenScrapContainor = null;
+    [SerializeField]
+    Animation _leftUpAnimation = null;
+    [SerializeField]
+    Animation _bottomAnimation = null;
+
+    [SerializeField]
+    float _maxTimeBeforeHideLeftUpUI = 10;
+
+    private float _currentTImeBeforeHideLeftUpUI = 0;
+
+    [SerializeField]
+    float _maxTimeBeforeHideBottomUI = 10;
+
+    private float _currentTImeBeforeHideLBottomUI = 0;
+
 
     [Header("Pictures")]
     [SerializeField]
@@ -52,6 +67,7 @@ public class UIManager : MonoBehaviour
         UpdateWrenchText();
         UpdateMaxScrapText();
         UpdateMaxGoldenScrapText();
+        SetBottomTriggerOn(false);
     }
     public void UpdateScrapText()
     {
@@ -119,12 +135,78 @@ public class UIManager : MonoBehaviour
 
         if (set)
         {
-            _leftUpAnimator.SetTrigger("On");
+            if (_LeftUpUI.activeSelf == false)
+            {
+                _currentTImeBeforeHideLeftUpUI = 0;
+                _leftUpAnimation.Play();
+                _LeftUpUI.SetActive(true);
+            }
         }
 
         else
         {
-            _leftUpAnimator.SetTrigger("Off");
+            if (_LeftUpUI.activeSelf)
+            {
+                _LeftUpUI.SetActive(false);
+                
+            }
+        }
+
+    }
+
+    public void SetBottomTriggerOn(bool set)
+    {
+
+        if (set)
+        {
+            if (_bottonUI.activeSelf == false)
+            {
+                _currentTImeBeforeHideLBottomUI = 0;
+                _bottonUI.SetActive(true);
+                _bottomAnimation.Play();
+                
+            }
+        }
+
+        else
+        {
+            if (_bottonUI.activeSelf)
+            {
+                _bottonUI.SetActive(false);
+
+            }
+        }
+
+    }
+
+    private void Update()
+    {
+        if (_LeftUpUI.activeSelf)
+        {
+            if (_currentTImeBeforeHideLeftUpUI < _maxTimeBeforeHideLeftUpUI)
+            {
+                _currentTImeBeforeHideLeftUpUI += Time.deltaTime;
+            }
+
+            else
+            {
+                SetLeftUpTriggerOn(false);
+
+            }
+        }
+
+        if (_bottonUI.activeSelf)
+        {
+            if (_currentTImeBeforeHideLBottomUI < _maxTimeBeforeHideBottomUI)
+            {
+                _currentTImeBeforeHideLBottomUI+= Time.deltaTime;
+            }
+
+            else
+            {
+                SetBottomTriggerOn(false);
+
+            }
         }
 
     }

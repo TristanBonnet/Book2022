@@ -15,18 +15,22 @@ public class BumperJump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_currentJumpTime < _maxJumpTime)
+        if (_playerRigibody != null)
         {
-            _playerRigibody.AddForce(_vectorForceJump);
-            _currentJumpTime += Time.deltaTime;
+            if (_currentJumpTime < _maxJumpTime)
+            {
+                _playerRigibody.AddForce(_vectorForceJump);
+                _currentJumpTime += Time.deltaTime;
 
-        }
+            }
 
-        else
-        {
-            _currentJumpTime = 0;
-            enabled = false;
+            else
+            {
+                _currentJumpTime = 0;
+                enabled = false;
+            }
         }
+        
     }
 
     private void OnEnable()

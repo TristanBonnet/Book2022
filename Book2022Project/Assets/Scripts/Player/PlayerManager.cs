@@ -19,10 +19,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     StartTransformProjectile _startTransformProjectile = null;
 
-    [SerializeField]
-    float _maxTimeBeforeHideUI = 10;
-
-    private float currentTImeBeforeHideUI = 0;
+    
 
     public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
 
@@ -36,12 +33,14 @@ public class PlayerManager : MonoBehaviour
         
         _inputPlayer.HandleAllInputs();
         TestBoxTrace();
+
+
     }
 
     private void FixedUpdate()
     {
         _playerLocomotion.HandleAllMovements();
-        //_playerLocomotion.CheckGrounded();
+        
     }
 
     private void LateUpdate()

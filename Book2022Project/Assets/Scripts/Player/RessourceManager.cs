@@ -68,8 +68,8 @@ public class RessourceManager : MonoBehaviour
             _healthManager.AddHealthPoint(1);
             _currentRingNumberForHealth = 0;
         }
-        
-        
+
+        GameManager._instance.UIManager.SetLeftUpTriggerOn(true);
     }
 
     public void RemoveRing(int ringRemoved)
@@ -81,6 +81,8 @@ public class RessourceManager : MonoBehaviour
         {
             _ringNumber = 0;
         }
+
+        GameManager._instance.UIManager.SetLeftUpTriggerOn(true);
     }
 
     public void AddWrench(int wrenchAdded)
