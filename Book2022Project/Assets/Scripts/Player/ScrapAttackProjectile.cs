@@ -20,7 +20,7 @@ public class ScrapAttackProjectile : MonoBehaviour
     [SerializeField]
     Collider _collider = null;
     [SerializeField]
-    float _maxInAirTimer = 2;
+    float _maxInAirTimer = 1;
 
     private float inAirTimer = 0;
 
@@ -76,7 +76,7 @@ public class ScrapAttackProjectile : MonoBehaviour
 
     private  bool CheckGrounded()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, 0.6f, _layerMask ))
+        if (Physics.Raycast(transform.position, Vector3.down, 1f, _layerMask ))
         {
             return true;
         }

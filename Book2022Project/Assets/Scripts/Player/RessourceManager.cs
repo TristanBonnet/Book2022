@@ -116,6 +116,7 @@ public class RessourceManager : MonoBehaviour
     {
 
         _maxScrapContainor += numberToAdd;
+        UpdateMaxScrap();
 
 
     }
@@ -124,7 +125,7 @@ public class RessourceManager : MonoBehaviour
 
         _maxGoldenScrapContainor += numberToAdd;
 
-
+        UpdateMaxGoldenScrap();
     }
 
 
@@ -148,6 +149,20 @@ public class RessourceManager : MonoBehaviour
     {
 
         GameManager._instance.UIManager.UpdateWrenchText();
+
+    }
+
+    private void UpdateMaxGoldenScrap()
+    {
+        GameManager._instance.UIManager.UpdateMaxGoldenScrapText();
+        
+
+    }
+
+    private void UpdateMaxScrap()
+    {
+
+        GameManager._instance.UIManager.UpdateMaxScrapText();
 
     }
 }

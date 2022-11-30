@@ -21,7 +21,7 @@ public class Bag : MonoBehaviour
             {
 
                 ressourcesManager.AddScrapContainor(_slotsToAdd);
-                Destroy(gameObject);
+                Destroy(this.gameObject);
 
             }
             
