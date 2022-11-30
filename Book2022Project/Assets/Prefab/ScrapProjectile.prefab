@@ -93,7 +93,7 @@ SphereCollider:
   m_GameObject: {fileID: 8863133907012022891}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   _particleSpawn: {fileID: 3913855497712678782, guid: 381547d7f025b184da21ab1f3e608139, type: 3}
   gravityForce: 200
   _collider: {fileID: 8863133907185678717}
+  _maxInAirTimer: 2
 --- !u!114 &8863133907185678689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +194,7 @@ SphereCollider:
   m_GameObject: {fileID: 8863133907185678694}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

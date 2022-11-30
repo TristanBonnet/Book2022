@@ -17,6 +17,9 @@ public class RessourceManager : MonoBehaviour
     private int _scrapNumber = 0;
     [SerializeField]
     private int _goldenScrapNumber = 0;
+    [SerializeField]
+    private int _maxGoldenScrapContainor = 15;
+
         
     public int _ringNumber = 0;
     private int _currentRingNumberForHealth = 0;
@@ -24,6 +27,10 @@ public class RessourceManager : MonoBehaviour
     public int WrenchNumber => _wrenchNumber;
     public int ScrapNumber => _scrapNumber;
     public int RingNumber => _ringNumber;
+
+    public int MaxGoldenScrapContainor => _maxGoldenScrapContainor;
+
+    public int MaxScrapContainor => _maxScrapContainor;
 
     public int GoldenScrapNumber => _goldenScrapNumber;
 
@@ -86,7 +93,7 @@ public class RessourceManager : MonoBehaviour
 
     public void AddGoldenScrap(int goldenScrapAdded)
     {
-
+        
         _goldenScrapNumber += goldenScrapAdded;
 
         UpdateGoldenScrapText();
@@ -104,6 +111,24 @@ public class RessourceManager : MonoBehaviour
         UpdateGoldenScrapText();
 
     }
+
+    public void AddScrapContainor(int numberToAdd)
+    {
+
+        _maxScrapContainor += numberToAdd;
+
+
+    }
+    public void AddGoldenScrapContainor(int numberToAdd)
+    {
+
+        _maxGoldenScrapContainor += numberToAdd;
+
+
+    }
+
+
+
 
     private void UpdateScrapText()
     {

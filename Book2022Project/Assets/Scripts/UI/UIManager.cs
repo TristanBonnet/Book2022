@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     RessourceManager _playerRessourcesManager = null;
     [SerializeField]
     PlatformManager _playerPlatformManager = null;
+     
 
     [Header("Texts")]
     [SerializeField]
@@ -23,6 +24,10 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI _goldenScrapText = null;
     [SerializeField]
     TextMeshProUGUI _wrenchText = null;
+    [SerializeField]
+    TextMeshProUGUI _maxScrapContainor = null;
+    [SerializeField]
+    TextMeshProUGUI _maxGoldenScrapContainor = null;
 
     [Header("Pictures")]
     [SerializeField]
@@ -36,6 +41,8 @@ public class UIManager : MonoBehaviour
         UpdateRingText();
         UpdateScrapText();
         UpdateWrenchText();
+        UpdateMaxScrapText();
+        UpdateMaxGoldenScrapText();
     }
     public void UpdateScrapText()
     {
@@ -81,6 +88,20 @@ public class UIManager : MonoBehaviour
     {
 
         // Add Attack Picture
+
+    }
+
+    public void UpdateMaxGoldenScrapText()
+    {
+        string currentText = _playerRessourcesManager.MaxGoldenScrapContainor.ToString();
+        _maxGoldenScrapContainor.SetText(currentText);
+
+    }
+
+    public void UpdateMaxScrapText()
+    {
+        string currentText = _playerRessourcesManager.MaxScrapContainor.ToString();
+        _maxScrapContainor.SetText(currentText);
 
     }
 }

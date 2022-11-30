@@ -63,6 +63,11 @@ public class ScrapAttackProjectile : MonoBehaviour
         }
         
         _rigidbody.AddForce(Vector3.down * inAirTimer * gravityForce);
+       
+    }
+
+    private void Update()
+    {
         if (CheckGrounded())
         {
             ProjectileExplosion();

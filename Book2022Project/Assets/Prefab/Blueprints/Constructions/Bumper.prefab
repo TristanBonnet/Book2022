@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 4768810076569733908}
   - component: {fileID: 1658592418156558873}
   - component: {fileID: 3855297570441667577}
+  - component: {fileID: 5980474419807693046}
   m_Layer: 6
   m_Name: Bumper
   m_TagString: Untagged
@@ -164,7 +165,22 @@ MonoBehaviour:
   _constructionSprite: {fileID: 21300000, guid: a7e6c9eb15bf17d4e83a8a9bea9c46dd, type: 3}
   _isValid: 0
   _constructionIndex: 1
-  _bumperForce: 15000
+  _bumperForce: 1500
+  _bumperJump: {fileID: 5980474419807693046}
+--- !u!114 &5980474419807693046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714177522695079956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eddfa4402fce5443a9cf354278f801e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxJumpTime: 0.5
+  _vectorForceJump: {x: 0, y: 3000, z: 0}
 --- !u!1 &5556572800789058486
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +193,7 @@ GameObject:
   - component: {fileID: 4502882945243855541}
   - component: {fileID: 5363028834169839320}
   - component: {fileID: 4694864793098090341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
