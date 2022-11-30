@@ -42,6 +42,7 @@ public class RessourceManager : MonoBehaviour
         }
 
         UpdateScrapText();
+
     }
 
     public void RemoveScrap(int scrapRemoved)
@@ -142,6 +143,7 @@ public class RessourceManager : MonoBehaviour
     {
 
         GameManager._instance.UIManager.UpdateGoldenScrapText();
+        
 
     }
 

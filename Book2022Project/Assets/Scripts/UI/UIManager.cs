@@ -6,6 +6,15 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField]
+    GameObject _LeftUpUI = null;
+    [SerializeField]
+    GameObject _bottonUI = null;
+    [SerializeField]
+    Animator _leftUpAnimator = null;
+    [SerializeField]
+    Animator _bottomAnimator = null;
+
     [Header("Managers")]
     [SerializeField]
     HealthManager _playerHealthManager = null;
@@ -48,7 +57,7 @@ public class UIManager : MonoBehaviour
     {
         string currentText = _playerRessourcesManager.ScrapNumber.ToString();
         _scrapText.SetText(currentText);
-
+        SetLeftUpTriggerOn(true);
 
     }
 
@@ -56,7 +65,7 @@ public class UIManager : MonoBehaviour
     {
         string currentText = _playerRessourcesManager.GoldenScrapNumber.ToString();
         _goldenScrapText.SetText(currentText);
-
+        SetLeftUpTriggerOn(true);
 
     }
 
@@ -64,7 +73,7 @@ public class UIManager : MonoBehaviour
     {
         string currentText = _playerRessourcesManager.WrenchNumber.ToString();
         _wrenchText.SetText(currentText);
-
+        SetLeftUpTriggerOn(true);
 
     }
 
@@ -72,7 +81,7 @@ public class UIManager : MonoBehaviour
     {
         string currentText = _playerHealthManager._currentHealthPoint.ToString();
         _healthText.SetText(currentText);
-
+        SetLeftUpTriggerOn(true);
 
     }
 
@@ -95,13 +104,28 @@ public class UIManager : MonoBehaviour
     {
         string currentText = _playerRessourcesManager.MaxGoldenScrapContainor.ToString();
         _maxGoldenScrapContainor.SetText(currentText);
-
+        SetLeftUpTriggerOn(true);
     }
 
     public void UpdateMaxScrapText()
     {
         string currentText = _playerRessourcesManager.MaxScrapContainor.ToString();
         _maxScrapContainor.SetText(currentText);
+        SetLeftUpTriggerOn(true);
+    }
+
+    public void SetLeftUpTriggerOn(bool set)
+    {
+
+        if (set)
+        {
+            _leftUpAnimator.SetTrigger("On");
+        }
+
+        else
+        {
+            _leftUpAnimator.SetTrigger("Off");
+        }
 
     }
 }

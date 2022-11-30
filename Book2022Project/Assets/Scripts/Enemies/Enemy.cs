@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour
     private bool isDead = false;
     public EnemyState _enemyState = EnemyState.Patrol;
     public PatrolSubState _patrolSubState = PatrolSubState.Move;
+    public bool Stun => stun;
 
    public AISensor AISensor => _aiSensor;
 
