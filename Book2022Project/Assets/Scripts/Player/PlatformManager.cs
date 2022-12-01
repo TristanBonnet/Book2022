@@ -74,7 +74,7 @@ public class PlatformManager : MonoBehaviour
         }
 
 
-
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
 
     }
 
@@ -103,7 +103,7 @@ public class PlatformManager : MonoBehaviour
         }
 
 
-
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
 
     }
 
@@ -165,7 +165,8 @@ public class PlatformManager : MonoBehaviour
 
             }
         }
-       
+
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
     }
     public void CheckAttackCost()
     {
@@ -181,6 +182,7 @@ public class PlatformManager : MonoBehaviour
             }
         }
 
+        GameManager._instance.UIManager.SetBottomTriggerOn(true);
     }
 
 
@@ -192,6 +194,11 @@ public class PlatformManager : MonoBehaviour
             GameManager._instance.UIManager.UpdateConstructionPicture(_currentSelectedPlatform.ConstructionSprite);
         }
 
+        else
+        {
+            GameManager._instance.UIManager.ResetConstructionSprite();
+        }
+
         GameManager._instance.UIManager.SetBottomTriggerOn(true);
     }
 
@@ -201,6 +208,11 @@ public class PlatformManager : MonoBehaviour
         {
             // ADD UPDATE ATATCK PICTURE IN UI MANAGER
             
+        }
+
+        else
+        {
+            GameManager._instance.UIManager.ResetAttackSprite();
         }
 
         GameManager._instance.UIManager.SetBottomTriggerOn(true);

@@ -4975,6 +4975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1310282120}
   - component: {fileID: 1310282121}
+  - component: {fileID: 4797724558153340154}
   m_Layer: 3
   m_Name: PlayerCollider
   m_TagString: Untagged
@@ -5011,6 +5012,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4797724558153340154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310282119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b8056bdd83ae1449df9a0bc941db5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2012688939
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5158,7 @@ GameObject:
   - component: {fileID: 939576261}
   - component: {fileID: 939576269}
   - component: {fileID: 939576276}
+  - component: {fileID: 1743596951}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -5204,6 +5218,7 @@ MonoBehaviour:
   _playerLocomotion: {fileID: 69681354460280296}
   _playerClassicAttack: {fileID: 69681354956681665}
   _playerPlatformManager: {fileID: 939576276}
+  _spinAttackComponent: {fileID: 1743596951}
   _movementInput: {x: 0, y: 0}
   _cameraInput: {x: 0, y: 0}
   _verticalInput: 0
@@ -5216,6 +5231,7 @@ MonoBehaviour:
   _incrementAttackIndex: 0
   _construct: 0
   _blueprintAttack: 0
+  _spinAttack: 0
 --- !u!114 &69681354460280296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5421,6 +5437,24 @@ MonoBehaviour:
   _activeConstructionList: 0101
   _currentIndexConstructionList: 0
   _currentIndexAttackList: 0
+--- !u!114 &1743596951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3c625fe6d3f929469db621c11e3d609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerRigibody: {fileID: 69681354460280301}
+  _spinAttackVelocity: 30000
+  _maxSpinAttackTime: 0.5
+  _maxDelayBetweenSpinAttack: 5
+  _healthRemoved: 1
+  _playerAnimator: {fileID: 987356045}
 --- !u!1 &69681354956681671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5733,7 +5767,7 @@ BoxCollider:
   m_GameObject: {fileID: 69681355113408253}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

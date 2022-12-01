@@ -23,8 +23,9 @@ public class BlueprintActivation : MonoBehaviour
     {
         PlayerManager player = other.GetComponentInParent<PlayerManager>();
         PlatformManager platformManager = other.GetComponentInParent<PlatformManager>();
+        PlayerCollider playerCollider = other.GetComponentInParent<PlayerCollider>();
 
-        if (player != null && platformManager != null)
+        if (player != null && platformManager != null && playerCollider != null)
         {
 
             switch (_blueprintType)

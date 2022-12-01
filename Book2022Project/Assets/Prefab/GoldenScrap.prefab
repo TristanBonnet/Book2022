@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2307190160569883606}
+  - component: {fileID: 5335371250178134515}
+  - component: {fileID: 2038370753233539351}
   m_Layer: 0
   m_Name: ScrapTrigger
   m_TagString: Untagged
@@ -31,6 +33,33 @@ Transform:
   m_Father: {fileID: 5253162522374716406}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5335371250178134515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2307190160569883607}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2038370753233539351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2307190160569883607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab38e4e6d3e5adc4c9b34f2fbdadb25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldenScrapToAdd: 1
+  _parentGameObject: {fileID: 5253162522374716403}
 --- !u!1 &5253162522374716403
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,8 +72,6 @@ GameObject:
   - component: {fileID: 5253162522374716401}
   - component: {fileID: 5253162522374716404}
   - component: {fileID: 5253162522374716405}
-  - component: {fileID: 5253162522374716411}
-  - component: {fileID: 8491806656089050919}
   m_Layer: 0
   m_Name: GoldenScrap
   m_TagString: Untagged
@@ -117,31 +144,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &5253162522374716411
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5253162522374716403}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8491806656089050919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5253162522374716403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab38e4e6d3e5adc4c9b34f2fbdadb25c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7622291145663658283
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5598938189132277423, guid: 3e801a9b934b5694dbae5bfe0a1dbcb2, type: 3}
       propertyPath: m_VersionIndex
-      value: 1110
+      value: 1113
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e801a9b934b5694dbae5bfe0a1dbcb2, type: 3}

@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class GoldenScrap : MonoBehaviour
 {
+    [SerializeField]
+    int _goldenScrapToAdd = 1;
+    [SerializeField]
+    GameObject _parentGameObject = null;
     private void OnTriggerEnter(Collider other)
     {
 
+        PlayerCollider playerCollider = other.GetComponentInParent<PlayerCollider>();
         RessourceManager ressourcesManager = other.GetComponentInParent<RessourceManager>();
 
-        if (ressourcesManager != null)
+        if (ressourcesManager != null && playerCollider != null)
         {
 
-            ressourcesManager.AddGoldenScrap(1);
-            Destroy(gameObject);
+            if (ressourcesManager.MaxGoldenScrapContainor >= (ressourcesManager.GoldenScrapNumber + _goldenScrapToAdd))
+            {
+                ressourcesManager.AddGoldenScrap(_goldenScrapToAdd);
+                Destroy(_parentGameObject);
+            }
+
+            
 
         }
     }

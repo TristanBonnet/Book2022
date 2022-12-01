@@ -11,6 +11,8 @@ public class InputPlayer : MonoBehaviour
     ClassicAttack _playerClassicAttack = null;
     [SerializeField]
     PlatformManager _playerPlatformManager = null;
+    [SerializeField]
+    SpinAttack _spinAttackComponent = null;
     
 
     public Vector2 _movementInput;
@@ -27,6 +29,7 @@ public class InputPlayer : MonoBehaviour
     public bool _incrementAttackIndex = false;
     public bool _construct = false;
     public bool _blueprintAttack = false;
+    public bool _spinAttack = false;
 
 
     private float _moveAmount;
@@ -45,6 +48,7 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.IncrementAttackIndex.performed += i => _incrementAttackIndex = true;
             _playerControls.PlayerMovements.Construct.performed += i => _construct = true;
             _playerControls.PlayerMovements.BlueprintAttack.performed += i => _blueprintAttack = true;
+            _playerControls.PlayerMovements.SpinAttack.performed += i => _spinAttack = true;
 
 
         }
@@ -76,6 +80,7 @@ public class InputPlayer : MonoBehaviour
         HandleJumpInput();
         HandleClassicAttackInput();
         HandleConstructionInputs();
+        HandleSpinAttackInput();
         
 
     }
@@ -99,6 +104,17 @@ public class InputPlayer : MonoBehaviour
             _classicAttackActive = false;
             _playerClassicAttack.StartAttack();
 
+        }
+
+
+    }
+
+    private void HandleSpinAttackInput()
+    {
+        if (_spinAttack == true)
+        {
+            _spinAttack = false;
+            _spinAttackComponent.SetSpinAttackActivated(true);
         }
 
 

@@ -8,17 +8,20 @@ public class Wrench : MonoBehaviour
     int _goldenScrapNecessary = 0;
     [SerializeField]
     int _wrenchToAdd = 1;
+    [SerializeField]
+    GameObject _parentGameObject = null;
     private void OnTriggerEnter(Collider other)
     {
-
+       
         RessourceManager ressourcesManager = other.GetComponentInParent<RessourceManager>();
-
-        if (ressourcesManager != null)
+        PlayerCollider playerCollider = other.GetComponentInParent<PlayerCollider>();
+        if (ressourcesManager != null && playerCollider != null)
         {
             if (ressourcesManager.GoldenScrapNumber >= _goldenScrapNecessary)
             {
+
                 ressourcesManager.AddWrench(_wrenchToAdd);
-                Destroy(this.gameObject);
+                Destroy(_parentGameObject);
             }
             
             

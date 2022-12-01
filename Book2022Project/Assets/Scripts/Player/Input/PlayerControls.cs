@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpinAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""81ffdc8c-0899-45ea-91e1-140106ad82c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -408,6 +417,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""BlueprintAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39cbb67d-b6e1-4c00-bfed-1dac43021f8b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpinAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d68a85f0-52bc-4485-bad8-e780cbf91164"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpinAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -424,6 +455,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovements_IncrementConstructionIndex = m_PlayerMovements.FindAction("IncrementConstructionIndex", throwIfNotFound: true);
         m_PlayerMovements_Construct = m_PlayerMovements.FindAction("Construct", throwIfNotFound: true);
         m_PlayerMovements_BlueprintAttack = m_PlayerMovements.FindAction("BlueprintAttack", throwIfNotFound: true);
+        m_PlayerMovements_SpinAttack = m_PlayerMovements.FindAction("SpinAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +523,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovements_IncrementConstructionIndex;
     private readonly InputAction m_PlayerMovements_Construct;
     private readonly InputAction m_PlayerMovements_BlueprintAttack;
+    private readonly InputAction m_PlayerMovements_SpinAttack;
     public struct PlayerMovementsActions
     {
         private @PlayerControls m_Wrapper;
@@ -503,6 +536,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @IncrementConstructionIndex => m_Wrapper.m_PlayerMovements_IncrementConstructionIndex;
         public InputAction @Construct => m_Wrapper.m_PlayerMovements_Construct;
         public InputAction @BlueprintAttack => m_Wrapper.m_PlayerMovements_BlueprintAttack;
+        public InputAction @SpinAttack => m_Wrapper.m_PlayerMovements_SpinAttack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovements; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -536,6 +570,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @BlueprintAttack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
                 @BlueprintAttack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
                 @BlueprintAttack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnBlueprintAttack;
+                @SpinAttack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
+                @SpinAttack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
+                @SpinAttack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
             }
             m_Wrapper.m_PlayerMovementsActionsCallbackInterface = instance;
             if (instance != null)
@@ -564,6 +601,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @BlueprintAttack.started += instance.OnBlueprintAttack;
                 @BlueprintAttack.performed += instance.OnBlueprintAttack;
                 @BlueprintAttack.canceled += instance.OnBlueprintAttack;
+                @SpinAttack.started += instance.OnSpinAttack;
+                @SpinAttack.performed += instance.OnSpinAttack;
+                @SpinAttack.canceled += instance.OnSpinAttack;
             }
         }
     }
@@ -578,5 +618,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnIncrementConstructionIndex(InputAction.CallbackContext context);
         void OnConstruct(InputAction.CallbackContext context);
         void OnBlueprintAttack(InputAction.CallbackContext context);
+        void OnSpinAttack(InputAction.CallbackContext context);
     }
 }

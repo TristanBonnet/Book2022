@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     Animator _leftUpAnimator = null;
     [SerializeField]
     Animator _bottomAnimator = null;
+    [SerializeField]
+    Sprite _emptySlotSprite = null;
 
     [Header("Managers")]
     [SerializeField]
@@ -178,6 +180,22 @@ public class UIManager : MonoBehaviour
         }
 
     }
+
+
+    public void ResetAttackSprite()
+    {
+
+        _attackPicture.sprite = _emptySlotSprite;
+
+    }
+
+    public void ResetConstructionSprite()
+    {
+
+        _constructionPicture.sprite = _emptySlotSprite;
+
+    }
+
 
     private void Update()
     {
