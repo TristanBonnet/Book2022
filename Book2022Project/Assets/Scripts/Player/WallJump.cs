@@ -41,6 +41,9 @@ public class WallJump : MonoBehaviour
     {
         _currentJumpTime = 0;
         _playerRigibody.velocity = new Vector3(0, 0, 0);
+        transform.Rotate(Vector3.up, 180);
+        Debug.Log(transform.rotation.y);
+        
     }
 
     

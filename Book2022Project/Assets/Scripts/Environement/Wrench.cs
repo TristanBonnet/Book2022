@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Wrench : MonoBehaviour
 {
+    [SerializeField]
+    int _goldenScrapNecessary = 0;
+    [SerializeField]
+    int _wrenchToAdd = 1;
     private void OnTriggerEnter(Collider other)
     {
 
@@ -11,9 +15,13 @@ public class Wrench : MonoBehaviour
 
         if (ressourcesManager != null)
         {
-
-            ressourcesManager.AddWrench(1);
-            Destroy(gameObject);
+            if (ressourcesManager.GoldenScrapNumber >= _goldenScrapNecessary)
+            {
+                ressourcesManager.AddWrench(_wrenchToAdd);
+                Destroy(this.gameObject);
+            }
+            
+            
 
         }
     }

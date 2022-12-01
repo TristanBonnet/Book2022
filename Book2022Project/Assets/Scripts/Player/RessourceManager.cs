@@ -17,6 +17,9 @@ public class RessourceManager : MonoBehaviour
     private int _scrapNumber = 0;
     [SerializeField]
     private int _goldenScrapNumber = 0;
+    [SerializeField]
+    private int _maxGoldenScrapContainor = 15;
+
         
     public int _ringNumber = 0;
     private int _currentRingNumberForHealth = 0;
@@ -24,6 +27,10 @@ public class RessourceManager : MonoBehaviour
     public int WrenchNumber => _wrenchNumber;
     public int ScrapNumber => _scrapNumber;
     public int RingNumber => _ringNumber;
+
+    public int MaxGoldenScrapContainor => _maxGoldenScrapContainor;
+
+    public int MaxScrapContainor => _maxScrapContainor;
 
     public int GoldenScrapNumber => _goldenScrapNumber;
 
@@ -35,6 +42,7 @@ public class RessourceManager : MonoBehaviour
         }
 
         UpdateScrapText();
+
     }
 
     public void RemoveScrap(int scrapRemoved)
@@ -60,8 +68,8 @@ public class RessourceManager : MonoBehaviour
             _healthManager.AddHealthPoint(1);
             _currentRingNumberForHealth = 0;
         }
-        
-        
+
+        GameManager._instance.UIManager.SetLeftUpTriggerOn(true);
     }
 
     public void RemoveRing(int ringRemoved)
@@ -73,6 +81,8 @@ public class RessourceManager : MonoBehaviour
         {
             _ringNumber = 0;
         }
+
+        GameManager._instance.UIManager.SetLeftUpTriggerOn(true);
     }
 
     public void AddWrench(int wrenchAdded)
@@ -86,7 +96,7 @@ public class RessourceManager : MonoBehaviour
 
     public void AddGoldenScrap(int goldenScrapAdded)
     {
-
+        
         _goldenScrapNumber += goldenScrapAdded;
 
         UpdateGoldenScrapText();
@@ -105,6 +115,25 @@ public class RessourceManager : MonoBehaviour
 
     }
 
+    public void AddScrapContainor(int numberToAdd)
+    {
+
+        _maxScrapContainor += numberToAdd;
+        UpdateMaxScrap();
+
+
+    }
+    public void AddGoldenScrapContainor(int numberToAdd)
+    {
+
+        _maxGoldenScrapContainor += numberToAdd;
+
+        UpdateMaxGoldenScrap();
+    }
+
+
+
+
     private void UpdateScrapText()
     {
 
@@ -116,6 +145,7 @@ public class RessourceManager : MonoBehaviour
     {
 
         GameManager._instance.UIManager.UpdateGoldenScrapText();
+        
 
     }
 
@@ -123,6 +153,20 @@ public class RessourceManager : MonoBehaviour
     {
 
         GameManager._instance.UIManager.UpdateWrenchText();
+
+    }
+
+    private void UpdateMaxGoldenScrap()
+    {
+        GameManager._instance.UIManager.UpdateMaxGoldenScrapText();
+        
+
+    }
+
+    private void UpdateMaxScrap()
+    {
+
+        GameManager._instance.UIManager.UpdateMaxScrapText();
 
     }
 }

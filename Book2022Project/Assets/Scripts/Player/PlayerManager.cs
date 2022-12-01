@@ -19,21 +19,28 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     StartTransformProjectile _startTransformProjectile = null;
 
+    
+
     public PlayerLocomotion PlayerLocomotion => _playerLocomotion;
 
     public StartTransformProjectile StartTransformProjectile => _startTransformProjectile;
 
+
+
     
     private void Update()
     {
+        
         _inputPlayer.HandleAllInputs();
         TestBoxTrace();
+
+
     }
 
     private void FixedUpdate()
     {
         _playerLocomotion.HandleAllMovements();
-        //_playerLocomotion.CheckGrounded();
+        
     }
 
     private void LateUpdate()

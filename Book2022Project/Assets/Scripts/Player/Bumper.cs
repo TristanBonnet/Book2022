@@ -6,16 +6,22 @@ public class Bumper : Construction
 {
     [SerializeField]
     private float _bumperForce = 1000;
+    [SerializeField]
+    private BumperJump _bumperJump = null;
 
     private void OnTriggerEnter(Collider other)
     {
         
         PlayerManager player = other.GetComponentInParent<PlayerManager>();
+        Rigidbody playerRigibody = other.GetComponentInParent<Rigidbody>();
         
 
-        if (player != null)
+        if (player != null && playerRigibody != null)
         {
-            player.PlayerLocomotion.PlayerRigibody.AddForce(Vector3.up * _bumperForce);
+
+            _bumperJump.SetPlayerRigibody(playerRigibody);
+            _bumperJump.enabled = true;
+            
 
         }
     }
