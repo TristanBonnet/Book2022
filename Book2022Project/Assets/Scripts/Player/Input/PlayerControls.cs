@@ -107,6 +107,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""14569689-5a2d-4a9d-b0d7-5b3a1aa7c374"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -439,6 +448,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""SpinAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bd06dc0-7421-4b4b-8424-333288e1ff85"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""30311bd6-ffff-49f7-846f-0207c805818f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -456,6 +487,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovements_Construct = m_PlayerMovements.FindAction("Construct", throwIfNotFound: true);
         m_PlayerMovements_BlueprintAttack = m_PlayerMovements.FindAction("BlueprintAttack", throwIfNotFound: true);
         m_PlayerMovements_SpinAttack = m_PlayerMovements.FindAction("SpinAttack", throwIfNotFound: true);
+        m_PlayerMovements_Pause = m_PlayerMovements.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -524,6 +556,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovements_Construct;
     private readonly InputAction m_PlayerMovements_BlueprintAttack;
     private readonly InputAction m_PlayerMovements_SpinAttack;
+    private readonly InputAction m_PlayerMovements_Pause;
     public struct PlayerMovementsActions
     {
         private @PlayerControls m_Wrapper;
@@ -537,6 +570,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Construct => m_Wrapper.m_PlayerMovements_Construct;
         public InputAction @BlueprintAttack => m_Wrapper.m_PlayerMovements_BlueprintAttack;
         public InputAction @SpinAttack => m_Wrapper.m_PlayerMovements_SpinAttack;
+        public InputAction @Pause => m_Wrapper.m_PlayerMovements_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovements; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -573,6 +607,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SpinAttack.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
                 @SpinAttack.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
                 @SpinAttack.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnSpinAttack;
+                @Pause.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerMovementsActionsCallbackInterface = instance;
             if (instance != null)
@@ -604,6 +641,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SpinAttack.started += instance.OnSpinAttack;
                 @SpinAttack.performed += instance.OnSpinAttack;
                 @SpinAttack.canceled += instance.OnSpinAttack;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -619,5 +659,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnConstruct(InputAction.CallbackContext context);
         void OnBlueprintAttack(InputAction.CallbackContext context);
         void OnSpinAttack(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

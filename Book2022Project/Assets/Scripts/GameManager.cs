@@ -18,11 +18,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Camera _camera = null;
 
+    [SerializeField]
+    private Pause _pause = null;
+
 
     public PlayerManager PlayerManager => _playerManager;
     public UIManager UIManager => _uiManager;
 
     public Camera Camera => _camera;
+
+    public Pause Pause => _pause;
 
     public BlueprintManager Blueprint => _blueprintManager;
 

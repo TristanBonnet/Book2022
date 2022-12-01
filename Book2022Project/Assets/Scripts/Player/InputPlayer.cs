@@ -30,6 +30,7 @@ public class InputPlayer : MonoBehaviour
     public bool _construct = false;
     public bool _blueprintAttack = false;
     public bool _spinAttack = false;
+    public bool _pauseAction = false;
 
 
     private float _moveAmount;
@@ -49,7 +50,7 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.Construct.performed += i => _construct = true;
             _playerControls.PlayerMovements.BlueprintAttack.performed += i => _blueprintAttack = true;
             _playerControls.PlayerMovements.SpinAttack.performed += i => _spinAttack = true;
-
+            _playerControls.PlayerMovements.Pause.performed += i => _pauseAction = true;
 
         }
 
@@ -75,15 +76,26 @@ public class InputPlayer : MonoBehaviour
 
     public void HandleAllInputs()
     {
-
-        HandleMovementInputs();
-        HandleJumpInput();
-        HandleClassicAttackInput();
-        HandleConstructionInputs();
-        HandleSpinAttackInput();
+        if (GameManager._instance.Pause.StatePause == false)
+        {
+            HandleMovementInputs();
+            HandleJumpInput();
+            HandleClassicAttackInput();
+            HandleConstructionInputs();
+            HandleSpinAttackInput();
+        }
+       
+       
         
 
     }
+
+
+    private void Update()
+    {
+        HandlePauseInput();
+    }
+
 
     private void HandleJumpInput()
     {
@@ -177,6 +189,18 @@ public class InputPlayer : MonoBehaviour
         HandleIncrementAttackIndex();
         HandleConstruct();
         HandleBlueprintAttack();
+
+    }
+
+    private void HandlePauseInput()
+    {
+        if (_pauseAction)
+        {
+            _pauseAction = false;
+            GameManager._instance.Pause.SetPause();
+        }
+
+
 
     }
 }
