@@ -32,10 +32,11 @@ public class HealthManager : MonoBehaviour
             _currentHealthPoint -= HealthRemoved;
             
 
-            if (_currentHealthPoint < 0)
+            if (_currentHealthPoint <= 0)
             {
                 _currentHealthPoint = 0;
                 _isDead = true;
+                Debug.Log("REMOVE HEALTH");
                 _deadEvent.Invoke();
             }
 
@@ -45,10 +46,10 @@ public class HealthManager : MonoBehaviour
             }
         }
 
-        else
-        {
-            _deadEvent.Invoke();
-        }
+        //else
+        //{
+        //    _deadEvent.Invoke();
+        //}
 
 
         UpdateUIManager();

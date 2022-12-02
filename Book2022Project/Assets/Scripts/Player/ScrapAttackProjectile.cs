@@ -56,7 +56,7 @@ public class ScrapAttackProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log(inAirTimer);
+        
         if (inAirTimer < _maxInAirTimer)
         {
             inAirTimer += Time.deltaTime;

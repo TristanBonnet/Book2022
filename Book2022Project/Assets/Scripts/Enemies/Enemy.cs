@@ -321,15 +321,18 @@ public class Enemy : MonoBehaviour
 
     public void SetDeadState()
     {
-        
-        if (_ressourcesSpawner != null)
+        Debug.Log("SET DEAD STATE");
+        if (isDead == false)
         {
-            _ressourcesSpawner.SpawnRessource();
-        }
+            
 
-        ParticleSystem particle = Instantiate<ParticleSystem>(_deadParticle);
-        particle.transform.position = transform.position;
-        Destroy(this.gameObject);
+            ParticleSystem particle = Instantiate<ParticleSystem>(_deadParticle);
+            particle.transform.position = transform.position;
+            Destroy(this.gameObject);
+            isDead = true;
+        }
+        
+        
 
     }
 

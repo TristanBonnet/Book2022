@@ -543,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ressource: {fileID: 1333457709805001447, guid: 62d358acd28436a44b2dd1f560e21f7c, type: 3}
   _ressourceNumber: 1
+  _transformSpawnRessources: {fileID: 1649062710}
 --- !u!65 &895663261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -670,7 +671,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6686014800224810910}
   - component: {fileID: 6686014800224810909}
-  - component: {fileID: 6686014800224810911}
   - component: {fileID: 112553134}
   m_Layer: 7
   m_Name: EnemyCollider
@@ -707,20 +707,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1.2315292}
   m_Center: {x: 0, y: 0, z: 0.14999008}
---- !u!114 &6686014800224810911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686014800224810880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e26576f74b5754cb2f3df6dc5d4edd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageDealed: 1
-  _doDamage: 1
 --- !u!114 &112553134
 MonoBehaviour:
   m_ObjectHideFlags: 0

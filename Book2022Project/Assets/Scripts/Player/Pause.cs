@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 
 public class Pause : MonoBehaviour
@@ -10,21 +11,33 @@ public class Pause : MonoBehaviour
     private GameObject _pauseUI = null;
 
     [SerializeField]
-    
-    
+    private EventSystem _eventSystem = null;
+
+    [SerializeField]
+    private GameObject _resumeButtonGameObject = null;
+    [SerializeField]
     private string _sceneName;
 
     private bool _pause = false;
 
     public bool StatePause => _pause;
+
+    private void Start()
+    {
+        _eventSystem.firstSelectedGameObject = _resumeButtonGameObject;
+    }
     public void SetPause()
     {
 
         if (_pause == false)
         {
             _pauseUI.SetActive(true);
+            
             _pause = true;
             Time.timeScale = 0;
+
+
+            
         }
 
         else
@@ -43,12 +56,18 @@ public class Pause : MonoBehaviour
 
     public void ClickRestartButton()
     {
-        Time.timeScale = 1;
+        
         SceneManager.LoadScene(_sceneName);
+        Time.timeScale = 1;
     }
 
     public void ClickQuitButton()
     {
         Application.Quit();
+    }
+
+    private void Update()
+    {
+        Debug.Log(_eventSystem.firstSelectedGameObject);
     }
 }

@@ -9,16 +9,19 @@ public class RessourcesSpawner : MonoBehaviour
     private GameObject _ressource = null;
     [SerializeField]
     private int _ressourceNumber = 1;
+    [SerializeField]
+    Transform _transformSpawnRessources = null;
         
     public void SpawnRessource()
     {
-        for (int i = 1; i < _ressourceNumber; i++)
+        Debug.Log(this);
+        for (int i = 1; i <= _ressourceNumber; i++)
         {
-            GameObject currentRessource = Instantiate<GameObject>(_ressource);
-            currentRessource.transform.position = transform.position;
-        }
             
-        
+            GameObject currentRessource = Instantiate<GameObject>(_ressource);
+            currentRessource.transform.position = _transformSpawnRessources.position;
+        }
+           
          
 
     }

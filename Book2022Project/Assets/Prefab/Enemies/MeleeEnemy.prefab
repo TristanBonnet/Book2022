@@ -713,6 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ressource: {fileID: 1333457709805001447, guid: 62d358acd28436a44b2dd1f560e21f7c, type: 3}
   _ressourceNumber: 5
+  _transformSpawnRessources: {fileID: 1007465255}
 --- !u!65 &1331677719674315784
 BoxCollider:
   m_ObjectHideFlags: 0
