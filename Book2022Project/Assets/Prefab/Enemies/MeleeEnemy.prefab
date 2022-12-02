@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 8398900424105653737}
   - component: {fileID: 8398900424105653736}
   - component: {fileID: 8398900424105653739}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
