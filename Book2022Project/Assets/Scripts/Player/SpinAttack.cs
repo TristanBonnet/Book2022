@@ -65,7 +65,7 @@ public class SpinAttack : MonoBehaviour
         if (_canSpinAttack)
         {
             _spinAttackActivated = set;
-            Debug.Log("ACTIVE ANIMATION");
+           
             _playerAnimator.SetTrigger("StartSpinAttack");
             _canSpinAttack = false;
         }
@@ -78,8 +78,9 @@ public class SpinAttack : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         HealthManager healthManager = other.GetComponentInParent<HealthManager>();
 
-        if (enemy != null && healthManager != null)
+        if (enemy != null && healthManager != null && _spinAttackActivated == true)
         {
+            Debug.Log("REMOVE HEALTH POINT TO ENEMY");
             healthManager.RemoveHealthPoint(_healthRemoved, this.gameObject);
         }
     }

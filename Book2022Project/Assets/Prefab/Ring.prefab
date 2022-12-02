@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1866075649}
-  - component: {fileID: 1866075650}
   m_Layer: 0
   m_Name: GroundCollider
   m_TagString: Untagged
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 3896001789323913305}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1866075650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866075648}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3896001789323913306
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1615944102431420008, guid: f24ddc78f4b2df3489363b5558e5c93f, type: 3}
       propertyPath: m_VersionIndex
-      value: 886
+      value: 895
       objectReference: {fileID: 0}
     - target: {fileID: 3061811739005866427, guid: f24ddc78f4b2df3489363b5558e5c93f, type: 3}
       propertyPath: m_RootOrder
