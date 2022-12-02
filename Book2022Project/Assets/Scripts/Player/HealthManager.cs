@@ -13,8 +13,13 @@ public class HealthManager : MonoBehaviour
     [SerializeField]
     UnityEvent _deadEvent = null;
 
-    public int _currentHealthPoint = 0;
+    private int _currentHealthPoint = 0;
 
+    public int CurrentHealthPoint => _currentHealthPoint;
+    private void Start()
+    {
+        _currentHealthPoint = _maxHealthPoint;
+    }
     public void AddHealthPoint(int HealthAdded)
     {
         if (_currentHealthPoint < _maxHealthPoint)

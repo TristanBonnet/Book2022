@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateRingText()
     {
-        string currentText = _playerHealthManager._currentHealthPoint.ToString();
+        string currentText = _playerHealthManager.CurrentHealthPoint.ToString();
         _healthText.SetText(currentText);
         SetLeftUpTriggerOn(true);
 
