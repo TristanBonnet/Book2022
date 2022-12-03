@@ -31,6 +31,7 @@ public class InputPlayer : MonoBehaviour
     public bool _blueprintAttack = false;
     public bool _spinAttack = false;
     public bool _pauseAction = false;
+    public bool _inputButton = false;
 
 
     private float _moveAmount;
@@ -51,6 +52,7 @@ public class InputPlayer : MonoBehaviour
             _playerControls.PlayerMovements.BlueprintAttack.performed += i => _blueprintAttack = true;
             _playerControls.PlayerMovements.SpinAttack.performed += i => _spinAttack = true;
             _playerControls.PlayerMovements.Pause.performed += i => _pauseAction = true;
+            _playerControls.PlayerMovements.Input.performed += i => _inputButton = true;
 
         }
 
@@ -94,6 +96,7 @@ public class InputPlayer : MonoBehaviour
     private void Update()
     {
         HandlePauseInput();
+        HandleInputButton();
     }
 
 
@@ -202,5 +205,17 @@ public class InputPlayer : MonoBehaviour
 
 
 
+    }
+
+    private void HandleInputButton()
+    {
+
+        if (_inputButton)
+        {
+            GameManager._instance.UIManager.ShowInput();
+            _inputButton = false;
+        }
+
+       
     }
 }

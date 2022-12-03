@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     Animator _bottomAnimator = null;
     [SerializeField]
     Sprite _emptySlotSprite = null;
+    [SerializeField]
+    TextMeshProUGUI _explicationText = null;
 
     [Header("Managers")]
     [SerializeField]
@@ -43,6 +45,8 @@ public class UIManager : MonoBehaviour
     Animation _leftUpAnimation = null;
     [SerializeField]
     Animation _bottomAnimation = null;
+    [SerializeField]
+    GameObject _inputImage = null;
 
     [SerializeField]
     float _maxTimeBeforeHideLeftUpUI = 10;
@@ -111,10 +115,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateAttackPicture()
+    public void UpdateAttackPicture(Sprite sprite)
     {
 
-        // Add Attack Picture
+        _attackPicture.sprite = sprite;
 
     }
 
@@ -226,6 +230,43 @@ public class UIManager : MonoBehaviour
 
             }
         }
+
+    }
+
+    public void UpdateExplicationText(string text)
+    {
+
+
+        _explicationText.SetText(text);
+
+    }
+
+
+    public void SetExplicationTextVisibility(bool visible)
+    {
+
+        _explicationText.enabled = visible;
+
+    }
+
+    public void ShowInput()
+    {
+        
+            if (_inputImage.gameObject.activeSelf == false)
+            {
+
+                _inputImage.gameObject.SetActive(true);
+
+            }
+
+            else
+            {
+                _inputImage.gameObject.SetActive(false);
+            }
+        
+
+        
+
 
     }
 }

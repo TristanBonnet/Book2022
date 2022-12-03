@@ -63,7 +63,9 @@ public class Pause : MonoBehaviour
 
     public void ClickQuitButton()
     {
-        Application.Quit();
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenuMap");
+            
     }
 
     private void Update()

@@ -206,8 +206,8 @@ public class PlatformManager : MonoBehaviour
     {
         if (_currentSelectedAttack != null)
         {
-            // ADD UPDATE ATATCK PICTURE IN UI MANAGER
-            
+            GameManager._instance.UIManager.UpdateAttackPicture(_currentSelectedAttack.AttackSprite);
+
         }
 
         else

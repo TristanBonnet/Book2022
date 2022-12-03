@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blueprintAttackIndex: 0
   _scrapCost: 5
+  _attackSprite: {fileID: 21300000, guid: 6b71304dfe9a0c14eab0051d4211f1d7, type: 3}
   _scrapAttackProjectile: {fileID: 8863133907185678688, guid: adb78c41e377e314a9cc40c651552dd0, type: 3}
   ScrapAttackIndex: 0
   _startProjectileTransform: {fileID: 0}

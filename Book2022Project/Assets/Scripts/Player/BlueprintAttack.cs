@@ -11,7 +11,10 @@ public class BlueprintAttack : MonoBehaviour
     [SerializeField]
     protected int _scrapCost = 2;
 
-    
+    [SerializeField]
+    protected Sprite _attackSprite = null;
+
+    public Sprite AttackSprite => _attackSprite;
 
     public int BlueprintAttackIndex => _blueprintAttackIndex;
 

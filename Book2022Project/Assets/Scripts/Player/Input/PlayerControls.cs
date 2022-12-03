@@ -116,6 +116,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Input"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c9953d8-5b61-4916-a62c-e639c28c637a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -470,6 +479,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80aa4a06-50cc-4d80-877e-8977df8820e5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Input"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d09d6d5-e21c-4988-80bc-d2d9b4d16902"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Input"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -488,6 +519,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovements_BlueprintAttack = m_PlayerMovements.FindAction("BlueprintAttack", throwIfNotFound: true);
         m_PlayerMovements_SpinAttack = m_PlayerMovements.FindAction("SpinAttack", throwIfNotFound: true);
         m_PlayerMovements_Pause = m_PlayerMovements.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerMovements_Input = m_PlayerMovements.FindAction("Input", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -557,6 +589,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovements_BlueprintAttack;
     private readonly InputAction m_PlayerMovements_SpinAttack;
     private readonly InputAction m_PlayerMovements_Pause;
+    private readonly InputAction m_PlayerMovements_Input;
     public struct PlayerMovementsActions
     {
         private @PlayerControls m_Wrapper;
@@ -571,6 +604,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @BlueprintAttack => m_Wrapper.m_PlayerMovements_BlueprintAttack;
         public InputAction @SpinAttack => m_Wrapper.m_PlayerMovements_SpinAttack;
         public InputAction @Pause => m_Wrapper.m_PlayerMovements_Pause;
+        public InputAction @Input => m_Wrapper.m_PlayerMovements_Input;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovements; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -610,6 +644,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnPause;
+                @Input.started -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnInput;
+                @Input.performed -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnInput;
+                @Input.canceled -= m_Wrapper.m_PlayerMovementsActionsCallbackInterface.OnInput;
             }
             m_Wrapper.m_PlayerMovementsActionsCallbackInterface = instance;
             if (instance != null)
@@ -644,6 +681,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Input.started += instance.OnInput;
+                @Input.performed += instance.OnInput;
+                @Input.canceled += instance.OnInput;
             }
         }
     }
@@ -660,5 +700,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnBlueprintAttack(InputAction.CallbackContext context);
         void OnSpinAttack(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnInput(InputAction.CallbackContext context);
     }
 }

@@ -12,13 +12,14 @@ public class HealthManager : MonoBehaviour
     bool _isDead = false;
     [SerializeField]
     UnityEvent _deadEvent = null;
-
+    
+    [SerializeField]
     private int _currentHealthPoint = 0;
 
     public int CurrentHealthPoint => _currentHealthPoint;
     private void Start()
     {
-        _currentHealthPoint = _maxHealthPoint;
+        
     }
     public void AddHealthPoint(int HealthAdded)
     {
