@@ -56,7 +56,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333457709805001447}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 334308454013e874a84f5e00d2dc7383, type: 3}
   m_Name: 
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scrapToAdd: 1
   _parentGameObject: {fileID: 1333457709805001447}
+  _audioclip: {fileID: 8300000, guid: f9b674af30bda7f4581f0acd7b9c6cfe, type: 3}
 --- !u!1001 &720812521047895043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5598938189132277423, guid: 3e801a9b934b5694dbae5bfe0a1dbcb2, type: 3}
       propertyPath: m_VersionIndex
-      value: 1104
+      value: 1107
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e801a9b934b5694dbae5bfe0a1dbcb2, type: 3}

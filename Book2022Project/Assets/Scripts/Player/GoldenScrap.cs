@@ -8,6 +8,8 @@ public class GoldenScrap : MonoBehaviour
     int _goldenScrapToAdd = 1;
     [SerializeField]
     GameObject _parentGameObject = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
     private void OnTriggerEnter(Collider other)
     {
 
@@ -20,6 +22,9 @@ public class GoldenScrap : MonoBehaviour
             if (ressourcesManager.MaxGoldenScrapContainor >= (ressourcesManager.GoldenScrapNumber + _goldenScrapToAdd))
             {
                 ressourcesManager.AddGoldenScrap(_goldenScrapToAdd);
+                SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                soundscript.SetAudioClip(_audioclip);
+                soundscript.transform.position = transform.position;
                 Destroy(_parentGameObject);
             }
 

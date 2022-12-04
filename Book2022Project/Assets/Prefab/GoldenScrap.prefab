@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goldenScrapToAdd: 1
   _parentGameObject: {fileID: 5253162522374716403}
+  _audioclip: {fileID: 8300000, guid: 684c9e247769a5f42985edd8629e6892, type: 3}
 --- !u!1 &5253162522374716403
 GameObject:
   m_ObjectHideFlags: 0

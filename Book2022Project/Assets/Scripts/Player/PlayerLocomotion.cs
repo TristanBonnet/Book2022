@@ -32,6 +32,8 @@ public class PlayerLocomotion : MonoBehaviour
     LayerMask _enemyLayer;
     [SerializeField]
     ParticleSystem _particle = null;
+    [SerializeField]
+    AudioSource _walkSoundEffect = null;
 
     [SerializeField]
     List<ParticleSystem> _playerParticlesList = null;
@@ -117,6 +119,11 @@ public class PlayerLocomotion : MonoBehaviour
 
                 
                 }
+
+            if (_walkSoundEffect != null && _walkSoundEffect.isPlaying == false)
+            {
+                _walkSoundEffect.Play();
+            }
                 
                 
             
@@ -130,8 +137,13 @@ public class PlayerLocomotion : MonoBehaviour
                 
                 _particle.Stop();
                 
-            } 
-            
+            }
+
+            if (_walkSoundEffect != null && _walkSoundEffect.isPlaying == true)
+            {
+                _walkSoundEffect.Stop();
+            }
+
         }
 
         //Debug.Log(currentGameObjectFrontOfPlayer);
@@ -288,6 +300,10 @@ public class PlayerLocomotion : MonoBehaviour
                     InstantiateParticle(transform, _playerParticlesList[1]);
                     _playerLocomotionAnimator.SetTrigger("Grounded");
                     SetGroundedAnimTrigger = false;
+                    AudioSource audio = GetComponentInParent<AudioSource>();
+                    PlayerSoundList list = GetComponentInParent<PlayerSoundList>();
+                    audio.clip = list._audioList[1];
+                    audio.Play();
                 }
                
             }

@@ -51,3 +51,4 @@ MonoBehaviour:
   ScrapAttackIndex: 0
   _startProjectileTransform: {fileID: 0}
   _maxTimeBeforeAttack: 1.5
+  _audioclip: {fileID: 8300000, guid: 7dbff6dde36ff0d458f59915ecbb5d99, type: 3}

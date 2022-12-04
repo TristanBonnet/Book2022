@@ -8,6 +8,9 @@ public class BlueprintActivation : MonoBehaviour
     BlueprintType _blueprintType = BlueprintType.Construction;
 
     [SerializeField]
+    AudioClip _audioclip = null;
+
+    [SerializeField]
     int _blueprintActivationIndex = 0;
 
 
@@ -34,6 +37,10 @@ public class BlueprintActivation : MonoBehaviour
                     {
                         if (platformManager.AddConstructionToList(_blueprintActivationIndex))
                         {
+
+                            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                            soundscript.SetAudioClip(_audioclip);
+                            soundscript.transform.position = transform.position;
                             Destroy(gameObject);
                         }
 
@@ -43,6 +50,9 @@ public class BlueprintActivation : MonoBehaviour
                     {
                         if (platformManager.AddAttackToList(_blueprintActivationIndex))
                         {
+                            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                            soundscript.SetAudioClip(_audioclip);
+                            soundscript.transform.position = transform.position;
                             Destroy(gameObject);
                         }
 

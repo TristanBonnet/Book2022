@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     float _enemyWalkSpeed = 1;
     [SerializeField]
     float _enemyRunSpeed = 1;
+    [SerializeField]
+    AudioSource _audioSoundEffect = null;
 
     [SerializeField]
     AISensor _aiSensor = null;
@@ -35,6 +37,8 @@ public class Enemy : MonoBehaviour
     float _maxStunTime = 2;
     [SerializeField]
     ParticleSystem _deadParticle = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
 
     private bool stun = false;
 
@@ -83,6 +87,27 @@ public class Enemy : MonoBehaviour
         if (_movableEnemy)
         {
             _currentPathPoint = _pathPointList[0];
+        }
+
+
+    }
+
+    private void Update()
+    {
+        if (_enemyRigibody.velocity.magnitude > 0.2)
+        {
+            if (_audioSoundEffect.isPlaying == false)
+            {
+                _audioSoundEffect.Play();
+            }
+            
+
+
+        }
+
+        else
+        {
+            _audioSoundEffect.Stop();
         }
 
 
@@ -328,6 +353,9 @@ public class Enemy : MonoBehaviour
 
             ParticleSystem particle = Instantiate<ParticleSystem>(_deadParticle);
             particle.transform.position = transform.position;
+            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+            soundscript.SetAudioClip(_audioclip);
+            soundscript.transform.position = transform.position;
             Destroy(this.gameObject);
             isDead = true;
         }

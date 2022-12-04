@@ -156,6 +156,7 @@ MonoBehaviour:
   gravityForce: 200
   _collider: {fileID: 8863133907185678717}
   _maxInAirTimer: 2
+  _audioclip: {fileID: 8300000, guid: 527d3ed140ce6694f8f5b1ede99b498a, type: 3}
 --- !u!114 &8863133907185678689
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ public class SpinAttack : MonoBehaviour
     private int _healthRemoved = 1;
     [SerializeField]
     Animator _playerAnimator = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
     private float _currentDelayBetweenSpinAttack = 0;
     private float _currentSpinAttackTime = 0;
     private bool _spinAttackActivated = false;
@@ -64,6 +66,9 @@ public class SpinAttack : MonoBehaviour
     {
         if (_canSpinAttack)
         {
+            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+            soundscript.SetAudioClip(_audioclip);
+            soundscript.transform.position = transform.position;
             _spinAttackActivated = set;
            
             _playerAnimator.SetTrigger("StartSpinAttack");

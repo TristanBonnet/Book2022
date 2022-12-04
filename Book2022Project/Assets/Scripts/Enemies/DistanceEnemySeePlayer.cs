@@ -17,6 +17,8 @@ public class DistanceEnemySeePlayer : SeePlayer
 
     [SerializeField]
     private Animator _animator = null;
+    [SerializeField]
+    AudioSource _audio = null;
 
     private void FixedUpdate()
     {
@@ -48,6 +50,7 @@ public class DistanceEnemySeePlayer : SeePlayer
     private void Attack()
     {
         _animator.SetTrigger("Shot");
+        _audio.Play();
       EnemyProjectileMovement projectile =   Instantiate<EnemyProjectileMovement>(_projectile);
         projectile.transform.position = _projectileStartTransform.position;
         projectile.transform.rotation = transform.rotation;

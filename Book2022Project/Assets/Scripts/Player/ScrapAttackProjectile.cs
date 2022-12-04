@@ -21,6 +21,8 @@ public class ScrapAttackProjectile : MonoBehaviour
     Collider _collider = null;
     [SerializeField]
     float _maxInAirTimer = 1;
+    [SerializeField]
+    AudioClip _audioclip = null;
 
     private float inAirTimer = 0;
 
@@ -30,6 +32,9 @@ public class ScrapAttackProjectile : MonoBehaviour
 
         yield return new WaitForSeconds(0.05f);
         ParticleSystem particleSpawn = Instantiate<ParticleSystem>(_particleSpawn);
+        SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+        soundscript.SetAudioClip(_audioclip);
+        soundscript.transform.position = transform.position;
         particleSpawn.transform.position = transform.position;
         Destroy(this.gameObject);
 
@@ -90,6 +95,7 @@ public class ScrapAttackProjectile : MonoBehaviour
 
     private void ProjectileExplosion()
     {
+        
         _explosionCollider.enabled = true;
         StartCoroutine(Destruction());
 

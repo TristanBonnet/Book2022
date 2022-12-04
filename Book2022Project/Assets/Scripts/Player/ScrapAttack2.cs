@@ -16,7 +16,8 @@ public class ScrapAttack2 : BlueprintAttack
     [SerializeField]
     public float _maxTimeBeforeAttack = 1.5f;
 
-
+    [SerializeField]
+    AudioClip _audioclip = null;
 
     private float _currentTimeBeforeAttack = 0;
 
@@ -89,6 +90,9 @@ public class ScrapAttack2 : BlueprintAttack
         ScrapAttackProjectile currentProjectile = Instantiate<ScrapAttackProjectile>(_scrapAttackProjectile);
         currentProjectile.transform.rotation = _startProjectileTransform.transform.rotation;
         currentProjectile.transform.position = _startProjectileTransform.transform.position;
+        SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+        soundscript.SetAudioClip(_audioclip);
+        soundscript.transform.position = transform.position;
 
 
     }

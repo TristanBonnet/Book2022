@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Pause _pause = null;
 
+    [SerializeField]
+    private SoundScript _soundScript = null;
+
 
     public PlayerManager PlayerManager => _playerManager;
     public UIManager UIManager => _uiManager;
@@ -30,6 +33,8 @@ public class GameManager : MonoBehaviour
     public Pause Pause => _pause;
 
     public BlueprintManager Blueprint => _blueprintManager;
+
+    public SoundScript SoundScript => _soundScript;
 
     private void Awake()
     {

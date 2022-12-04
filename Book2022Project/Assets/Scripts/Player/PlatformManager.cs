@@ -20,7 +20,8 @@ public class PlatformManager : MonoBehaviour
     RessourceManager _ressourceManager = null;
     [SerializeField]
     List<bool> _activeConstructionList;
-
+    [SerializeField]
+    AudioClip _audioclip = null;
     private Construction _currentPlateform = null;
 
     private Construction _currentSelectedPlatform = null;
@@ -136,6 +137,9 @@ public class PlatformManager : MonoBehaviour
 
         if (currentConstructionSelected != null)
         {
+            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+            soundscript.SetAudioClip(_audioclip);
+            soundscript.transform.position = transform.position;
             Construction currentConstructionSpawned = Instantiate<Construction>(currentConstructionSelected);
             currentConstructionSpawned.transform.position = platformPosition;
             currentConstructionSpawned.transform.rotation = _startTraceTransform.transform.rotation;

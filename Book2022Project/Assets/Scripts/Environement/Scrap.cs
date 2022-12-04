@@ -8,6 +8,8 @@ public class Scrap : MonoBehaviour
     int _scrapToAdd = 1;
     [SerializeField]
     GameObject _parentGameObject = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
     private void OnTriggerEnter(Collider other)
     {
         
@@ -19,6 +21,9 @@ public class Scrap : MonoBehaviour
             if (ressourcesManager.MaxScrapContainor >= (ressourcesManager.ScrapNumber + _scrapToAdd))
             {
                 ressourcesManager.AddScrap(_scrapToAdd);
+                SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                soundscript.SetAudioClip(_audioclip);
+                soundscript.transform.position = transform.position;
                 Destroy(_parentGameObject);
 
             }

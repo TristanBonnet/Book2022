@@ -36,6 +36,10 @@ public class PlayerJump : MonoBehaviour
     private void OnEnable()
     {
         _currentJumpTime = 0;
+        AudioSource audio = GetComponentInParent<AudioSource>();
+        PlayerSoundList list = GetComponentInParent<PlayerSoundList>();
+        audio.clip = list._audioList[0];
+        audio.Play();
     }
 
     

@@ -12,6 +12,8 @@ public class ClassicAttack : MonoBehaviour
     Collider _weaponCollider = null;
     [SerializeField]
     Animator _animator = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
 
     public int _attackNumber = 0;
 
@@ -63,6 +65,9 @@ public class ClassicAttack : MonoBehaviour
             SetAttackNumber();
             _animator.SetInteger("AttackNumber", _attackNumber);
             _animator.SetTrigger("TriggerAttack");
+            SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+            soundscript.SetAudioClip(_audioclip);
+            soundscript.transform.position = transform.position;
         }
       
 

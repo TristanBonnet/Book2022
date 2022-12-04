@@ -5159,6 +5159,9 @@ GameObject:
   - component: {fileID: 939576269}
   - component: {fileID: 939576276}
   - component: {fileID: 1743596951}
+  - component: {fileID: 1715315796}
+  - component: {fileID: 1715315787}
+  - component: {fileID: 1715315795}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -5232,6 +5235,8 @@ MonoBehaviour:
   _construct: 0
   _blueprintAttack: 0
   _spinAttack: 0
+  _pauseAction: 0
+  _inputButton: 0
 --- !u!114 &69681354460280296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5262,6 +5267,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _particle: {fileID: 409113560}
+  _walkSoundEffect: {fileID: 0}
   _playerParticlesList:
   - {fileID: 5441037699505717448, guid: 820f2b87b3230de48b7ad767695e29a0, type: 3}
   - {fileID: 5441037699505717448, guid: 1dc6253faab089c48bc5e3156395cea8, type: 3}
@@ -5358,7 +5364,7 @@ MonoBehaviour:
   _playerState: {fileID: 69681354460280213}
   _jumpForce: 1000
   _playerRigibody: {fileID: 69681354460280301}
-  _vectorForceJump: {x: 0, y: 1500, z: 0}
+  _vectorForceJump: {x: 0, y: 750, z: 0}
 --- !u!114 &69681354460280215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5376,7 +5382,7 @@ MonoBehaviour:
   _playerState: {fileID: 69681354460280213}
   _playerRigibody: {fileID: 69681354460280301}
   YVelocity: 200
-  ZVelocity: 100
+  ZVelocity: 140
 --- !u!114 &939576261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5393,7 +5399,7 @@ MonoBehaviour:
   _wrenchNumber: 2
   _maxScrapContainor: 15
   _scrapNumber: 8
-  _goldenScrapNumber: 4
+  _goldenScrapNumber: 6
   _maxGoldenScrapContainor: 15
   _ringNumber: 0
 --- !u!114 &939576269
@@ -5408,12 +5414,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83b5a8a216737c479ac82d7fbc2a3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoint: 4
+  _maxHealthPoint: 8
   _isDead: 0
   _deadEvent:
     m_PersistentCalls:
       m_Calls: []
-  _currentHealthPoint: 2
+  _currentHealthPoint: 4
 --- !u!114 &939576276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5427,8 +5433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _constructionList: []
-  _attackList:
-  - {fileID: 0}
+  _attackList: []
   _playerRigibody: {fileID: 69681354460280301}
   _jumpForce: 10000
   _startTraceTransform: {fileID: 69681356088214840}
@@ -5455,6 +5460,133 @@ MonoBehaviour:
   _maxDelayBetweenSpinAttack: 5
   _healthRemoved: 1
   _playerAnimator: {fileID: 987356045}
+  _audioclip: {fileID: 8300000, guid: 1afdfb93df67e7542a676a76e5bd444b, type: 3}
+--- !u!82 &1715315796
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1afdfb93df67e7542a676a76e5bd444b, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1715315787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a1186b22fb092468551d83a023de17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _listExplanationText: []
+--- !u!114 &1715315795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69681354460280290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeda545f24576e747a96bfb24ac0db30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioList:
+  - {fileID: 8300000, guid: 30dfffab277d88d49aad60b735af3380, type: 3}
+  - {fileID: 8300000, guid: 3a73fc5936b6dad4cbcde287607fb7eb, type: 3}
+  - {fileID: 8300000, guid: 4e5e79c469c369c4fbe677939f4d5adc, type: 3}
+  - {fileID: 8300000, guid: c3cf8dfc96d296b429eac6b60af17b74, type: 3}
 --- !u!1 &69681354956681671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5505,6 +5637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponCollider: {fileID: 69681355282896529}
   _animator: {fileID: 69681354956681667}
+  _audioclip: {fileID: 8300000, guid: 2df0da8cf1b0fc84b9833e78561d289b, type: 3}
   _attackNumber: 0
   _event:
     m_PersistentCalls:
