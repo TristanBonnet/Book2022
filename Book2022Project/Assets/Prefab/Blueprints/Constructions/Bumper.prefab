@@ -167,6 +167,7 @@ MonoBehaviour:
   _constructionIndex: 1
   _bumperForce: 1500
   _bumperJump: {fileID: 5980474419807693046}
+  _audioclip: {fileID: 8300000, guid: 37f21fef4f0e06e40889e90b7344dcf6, type: 3}
 --- !u!114 &5980474419807693046
 MonoBehaviour:
   m_ObjectHideFlags: 0

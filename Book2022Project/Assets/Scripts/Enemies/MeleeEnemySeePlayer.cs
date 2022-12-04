@@ -85,6 +85,11 @@ public class MeleeEnemySeePlayer : SeePlayer
 
     }
 
-    
+    public void HitByPlayer()
+    {
+
+        _enemyMeleeAnimator.SetTrigger("Hit");
+
+    }
 
 }

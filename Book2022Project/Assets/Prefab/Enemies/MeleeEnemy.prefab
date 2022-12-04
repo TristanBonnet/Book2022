@@ -246,6 +246,34 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _damageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1128081929}
+        m_TargetAssemblyTypeName: HealthManager, Assembly-CSharp
+        m_MethodName: PlayHitSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8398900424699653623}
+        m_TargetAssemblyTypeName: MeleeEnemySeePlayer, Assembly-CSharp
+        m_MethodName: HitByPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _audioclip: {fileID: 8300000, guid: ba83d69c86ddc7746b06bfe5ff894e65, type: 3}
   _currentHealthPoint: 4
 --- !u!1 &271479373662017815
 GameObject:

@@ -8,6 +8,8 @@ public class Bag : MonoBehaviour
     private int _goldenScrapsNecessary = 5;
     [SerializeField]
     private int _slotsToAdd = 15;
+    [SerializeField]
+    AudioClip _audioclip = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +21,9 @@ public class Bag : MonoBehaviour
 
             if (ressourcesManager.GoldenScrapNumber >= _goldenScrapsNecessary)
             {
-
+                SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                soundscript.SetAudioClip(_audioclip);
+                soundscript.transform.position = transform.position;
                 ressourcesManager.AddScrapContainor(_slotsToAdd);
                 Destroy(this.gameObject);
 

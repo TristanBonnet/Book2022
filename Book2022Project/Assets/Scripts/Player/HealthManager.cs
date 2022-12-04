@@ -12,7 +12,11 @@ public class HealthManager : MonoBehaviour
     bool _isDead = false;
     [SerializeField]
     UnityEvent _deadEvent = null;
-    
+    [SerializeField]
+    UnityEvent _damageEvent = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
+
     [SerializeField]
     private int _currentHealthPoint = 0;
 
@@ -49,6 +53,7 @@ public class HealthManager : MonoBehaviour
             else
             {
                 _isDead = false;
+                _damageEvent.Invoke();
             }
         }
 
@@ -74,6 +79,15 @@ public class HealthManager : MonoBehaviour
 
         }
 
+
+    }
+
+    public void PlayHitSound()
+    {
+
+        SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+        soundscript.SetAudioClip(_audioclip);
+        soundscript.transform.position = transform.position;
 
     }
 }

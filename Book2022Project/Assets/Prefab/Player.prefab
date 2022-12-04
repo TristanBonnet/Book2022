@@ -5419,6 +5419,22 @@ MonoBehaviour:
   _deadEvent:
     m_PersistentCalls:
       m_Calls: []
+  _damageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 939576269}
+        m_TargetAssemblyTypeName: HealthManager, Assembly-CSharp
+        m_MethodName: PlayHitSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _audioclip: {fileID: 8300000, guid: 54a9d543dc0057e448dffbefc296f94d, type: 3}
   _currentHealthPoint: 4
 --- !u!114 &939576276
 MonoBehaviour:
@@ -5440,6 +5456,7 @@ MonoBehaviour:
   _YLocation: 1
   _ressourceManager: {fileID: 939576261}
   _activeConstructionList: 0101
+  _audioclip: {fileID: 0}
   _currentIndexConstructionList: 0
   _currentIndexAttackList: 0
 --- !u!114 &1743596951

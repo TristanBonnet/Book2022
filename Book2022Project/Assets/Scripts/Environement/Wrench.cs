@@ -10,6 +10,8 @@ public class Wrench : MonoBehaviour
     int _wrenchToAdd = 1;
     [SerializeField]
     GameObject _parentGameObject = null;
+    [SerializeField]
+    AudioClip _audioclip = null;
     private void OnTriggerEnter(Collider other)
     {
        
@@ -19,7 +21,9 @@ public class Wrench : MonoBehaviour
         {
             if (ressourcesManager.GoldenScrapNumber >= _goldenScrapNecessary)
             {
-
+                SoundScript soundscript = Instantiate<SoundScript>(GameManager._instance.SoundScript);
+                soundscript.SetAudioClip(_audioclip);
+                soundscript.transform.position = transform.position;
                 ressourcesManager.AddWrench(_wrenchToAdd);
                 Destroy(_parentGameObject);
             }

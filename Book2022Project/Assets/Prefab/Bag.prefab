@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _goldenScrapsNecessary: 1
   _slotsToAdd: 15
+  _audioclip: {fileID: 8300000, guid: c0da5d36ff3d07a4e81fddd12c8c3fa9, type: 3}
 --- !u!1 &8445453056676259769
 GameObject:
   m_ObjectHideFlags: 0
